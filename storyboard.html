@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<!--
+* This file is part of bezeye, Evoke 2014 demoscene party entry
+* Copyright (C) 2014, xyzzy@rockingship.net
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+<head>
+<meta charset="iso-8859-1">
+<title>Storyboard</title>
+  <script src="mootools-core-1.4.5.js" type="text/javascript"></script>
+  <script src="mootools-more-1.4.0.1.js" type="text/javascript"></script>
+</head>
+
+<body >
+
+<div style="position: relative; width:720px; height:405px; float: right; border: 1px solid black">
+
+<canvas id="myCanvas" width="720" height="405" style="position: absolute; z-index: 0">
+</canvas>
+
+<svg id="svg" width="720px" height="405px" style="background-color: none; position: absolute; z-index: 1">
+  <path id="wingL1" d="" stroke-width="1" stroke="#f00" fill="none" style="pointer-events:none;" />
+  <path id="wingR1" d="" stroke-width="1" stroke="#f00" fill="none" style="pointer-events:none;" />
+  <ellipse id="eye1" ry="8" rx="8" stroke="#f00" fill="none" />
+  <ellipse id="pinL1" ry="2" rx="2" stroke="#f00" fill="none" />
+  <ellipse id="pinR1" ry="2" rx="2" stroke="#f00" fill="none" />
+  <path id="wingL2" d="" stroke-width="1" stroke="#0f0" fill="none" style="pointer-events:none;" />
+  <path id="wingR2" d="" stroke-width="1" stroke="#0f0" fill="none" style="pointer-events:none;" />
+  <ellipse id="eye2" ry="8" rx="8" stroke="#0f0" fill="none" />
+  <ellipse id="pinL2" ry="2" rx="2" stroke="#f00" fill="none" />
+  <ellipse id="pinR2" ry="2" rx="2" stroke="#f00" fill="none" />
+  <path id="wingL3" d="" stroke-width="1" stroke="#00f" fill="none" style="pointer-events:none;" />
+  <path id="wingR3" d="" stroke-width="1" stroke="#00f" fill="none" style="pointer-events:none;" />
+  <ellipse id="eye3" ry="8" rx="8" stroke="#00f" fill="none" />
+  <ellipse id="pinL3" ry="2" rx="2" stroke="#f00" fill="none" />
+  <ellipse id="pinR3" ry="2" rx="2" stroke="#f00" fill="none" />
+
+  <ellipse id="dot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="dot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="dot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="dot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="dot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="dot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="path" d="" stroke-width="2" stroke="#000" fill="none" style="pointer-events:none;" />
+</svg>
+</div>
+
+<button type="button" id="badd">Add</button>
+<button type="button" id="bdel">Del</button>
+<button type="button" id="bwire">Wire</button>
+<button type="button" id="bfill">Fill</button>
+<button type="button" id="bpause">Pause</button>
+
+<div style="">
+<div id="txt"></div>
+
+<div id="slider" class="slider" style="background: #CCC; height: 16px; width: 720px; position: relative;">
+  <div id="knob1" style="background: #f00; width: 16px; height: 16px; position: absolute;"></div>
+  <div id="knob2" style="background: #0f0; width: 16px; height: 16px; position: absolute;"></div>
+  <div id="knob3" style="background: #00f; width: 16px; height: 16px; position: absolute;"></div>
+</div>
+
+<svg id="size" width="720px" height="100px" style="background-color: #eee;">
+  <ellipse id="sizeknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="sizeknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="sizeknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="sizedot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="sizedot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="sizedot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="sizedot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="sizedot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="sizedot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="sizepath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+rotate:
+</pre>
+<svg id="rot" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="rotknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="rotknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="rotknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="rotdot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="rotdot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="rotdot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="rotdot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="rotdot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="rotdot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="rotpath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+wing size:
+</pre>
+<svg id="wngsiz" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="wngsizknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="wngsizknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="wngsizknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="wngsizdot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="wngsizdot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="wngsizdot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="wngsizdot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="wngsizdot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="wngsizdot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="wngsizpath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+wing width:
+</pre>
+<svg id="wngwid" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="wngwidknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="wngwidknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="wngwidknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="wngwiddot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="wngwiddot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="wngwiddot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="wngwiddot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="wngwiddot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="wngwiddot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="wngwidpath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+flap:
+</pre>
+<svg id="flap" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="flapknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="flapknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="flapknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="flapdot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="flapdot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="flapdot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="flapdot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="flapdot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="flapdot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="flappath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+iris size:
+</pre>
+<svg id="irissiz" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="irissizknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="irissizknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="irissizknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="irissizdot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="irissizdot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="irissizdot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="irissizdot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="irissizdot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="irissizdot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="irissizpath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+upper lid:
+</pre>
+<svg id="ulid" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="ulidknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="ulidknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="ulidknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="uliddot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="uliddot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="uliddot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="uliddot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="uliddot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="uliddot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="ulidpath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+<pre style="border:0; padding:0; margin:0; font-size: 10px;">
+lower lid:
+</pre>
+<svg id="dlid" width="720px" height="72px" style="background-color: #eee;">
+  <ellipse id="dlidknob1" ry="8" rx="8" stroke="none" fill="#f00" />
+  <ellipse id="dlidknob2" ry="8" rx="8" stroke="none" fill="#0f0"/>
+  <ellipse id="dlidknob3" ry="8" rx="8" stroke="none" fill="#00f" />
+
+  <ellipse id="dliddot1" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="dliddot2" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="dliddot3" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="dliddot4" ry="4" rx="4" stroke="none" fill="#00f"/>
+  <ellipse id="dliddot5" ry="4" rx="4" stroke="none" fill="#00f" />
+  <ellipse id="dliddot6" ry="4" rx="4" stroke="none" fill="#00f" />
+  <path id="dlidpath" d="" stroke-width="2" stroke="#FE0101" fill="none" style="pointer-events:none;" />
+</svg>
+</div>
+
+<pre>
+var initialPos = <span id="txtA"></span>;
+var initialSize = <span id="sizetxt"></span>;
+var initialRotate = <span id="rottxt"></span>;
+var initialWingSize = <span id="wngsiztxt"></span>;
+var initialWingWidth = <span id="wngwidtxt"></span>;
+var initialFlap = <span id="flaptxt"></span>;
+var initialIrisSize = <span id="irissiztxt"></span>;
+var initialUlid = <span id="ulidtxt"></span>;
+var initialDlid = <span id="dlidtxt"></span>;
+</pre>
+
+<script type="text/javascript">
+
+	var _ = this;
+
+	var wingL = [{"x":382,"y":80},{"x":423,"y":209},{"x":414,"y":362},{"x":365,"y":421},{"x":236,"y":464},{"x":131,"y":347},{"x":214,"y":263},{"x":88,"y":178},{"x":100,"y":67},{"x":240,"y":16}];
+	var wingLA = [];
+	var wingLB = [];
+	var wingLC = [];
+
+	wingL = [{"x":-92,"y":-354},{"x":-1,"y":-69},{"x":-21,"y":270},{"x":-130,"y":400},{"x":-415,"y":495},{"x":-647,"y":237},{"x":-464,"y":51},{"x":-743,"y":-137},{"x":-716,"y":-383},{"x":-406,"y":-496}];
+	var wingLhotx = 789;
+	var wingLhoty = 498;
+	var wingLmaxx = 790;
+	var wingLmaxy = 1000;
+
+	function calcControls(A, B, C)
+	{
+		var N = A.length;
+
+		if (N == 3) {
+
+			for (var j=0; j<3; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.333333333333
+			 	       +A[(j+2)%N]*-0.333333333333;
+
+		} else if (N == 4) {
+
+			for (var j=0; j<4; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.250000000000+A[(j+2)%N]* 0.000000000000
+			 	       +A[(j+3)%N]*-0.250000000000;
+
+		} else if (N == 5) {
+
+			for (var j=0; j<5; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.272727272727+A[(j+2)%N]*-0.090909090909
+			 	       +A[(j+3)%N]* 0.090909090909+A[(j+4)%N]*-0.272727272727;
+
+		} else if (N == 6) {
+
+			for (var j=0; j<6; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.266666666667+A[(j+2)%N]*-0.066666666667+A[(j+3)%N]* 0.000000000000
+			 	       +A[(j+4)%N]* 0.066666666667+A[(j+5)%N]*-0.266666666667;
+
+		} else if (N == 7) {
+
+			for (var j=0; j<7; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.268292682927+A[(j+2)%N]*-0.073170731707+A[(j+3)%N]* 0.024390243902
+			 	       +A[(j+4)%N]*-0.024390243902+A[(j+5)%N]* 0.073170731707+A[(j+6)%N]*-0.268292682927;
+		} else if (N == 8) {
+
+			for (var j=0; j<8; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.267857142857+A[(j+2)%N]*-0.071428571429+A[(j+3)%N]* 0.017857142857+A[(j+4)%N]*-0.000000000000
+			 	       +A[(j+5)%N]*-0.017857142857+A[(j+6)%N]* 0.071428571429+A[(j+7)%N]*-0.267857142857;
+
+		} else if (N == 9) {
+
+			for (var j=0; j<9; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.267973856209+A[(j+2)%N]*-0.071895424837+A[(j+3)%N]* 0.019607843137+A[(j+4)%N]*-0.006535947712
+			 	       +A[(j+5)%N]* 0.006535947712+A[(j+6)%N]*-0.019607843137+A[(j+7)%N]* 0.071895424837+A[(j+8)%N]*-0.267973856209;
+
+		} else if (N == 10) {
+
+			for (var j=0; j<10; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.267942583732+A[(j+2)%N]*-0.071770334928+A[(j+3)%N]* 0.019138755981+A[(j+4)%N]*-0.004784688995+A[(j+5)%N]* 0.000000000000
+			 	       +A[(j+6)%N]* 0.004784688995+A[(j+7)%N]*-0.019138755981+A[(j+8)%N]* 0.071770334928+A[(j+9)%N]*-0.267942583732;
+
+		} else if (N&1) {
+
+			for (var j=0; j<N; j++)
+				B[j] = A[j]* 1.000000000000
+			 	       +A[(j+1)%N]* 0.267973856209+A[(j+2)%N]*-0.071895424837+A[(j+3)%N]* 0.019607843137+A[(j+4)%N]*-0.006535947712
+			 	       +A[(j-4+N)%N]* 0.006535947712+A[(j-3+N)%N]*-0.019607843137+A[(j-2+N)%N]* 0.071895424837+A[(j-1+N)%N]*-0.267973856209;
+
+		} else {
+
+			for (var j=0; j<N; j++)
+				B[j] = A[j]* 1.000000000000
+			 	 	      +A[(j+1)%N]* 0.267942583732+A[(j+2)%N]*-0.071770334928+A[(j+3)%N]* 0.019138755981+A[(j+4)%N]*-0.004784688995
+			 	 	      +A[(j-4+N)%N]* 0.004784688995+A[(j-3+N)%N]*-0.019138755981+A[(j-2+N)%N]* 0.071770334928+A[(j-1+N)%N]*-0.267942583732;
+
+		}
+
+ 	       var round = Math.round;
+ 	       for (var j=0; j<N; j++) {
+ 	 	      B[j] = round(B[j]*10)/10;
+ 	       }
+
+ 	       for (var i=0; i<N; i++) {
+ 	 	      C[i] = 2*A[(i+1)%N] - B[(i+1)%N];
+ 	       }
+	}
+
+	function calcControlsXY(A, B, C)
+	{
+		var N = A.length;
+
+		if (N == 3) {
+
+			for (var j=0; j<3; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.333333333333
+				 	       +A[(j+2)%N].x*-0.333333333333,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.333333333333
+				 	       +A[(j+2)%N].y*-0.333333333333 };
+
+		} else if (N == 4) {
+
+			for (var j=0; j<4; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.250000000000+A[(j+2)%N].x* 0.000000000000
+				 	       +A[(j+3)%N].x*-0.250000000000,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.250000000000+A[(j+2)%N].y* 0.000000000000
+				 	       +A[(j+3)%N].y*-0.250000000000 };
+
+		} else if (N == 5) {
+
+			for (var j=0; j<5; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.272727272727+A[(j+2)%N].x*-0.090909090909
+				 	       +A[(j+3)%N].x* 0.090909090909+A[(j+4)%N].x*-0.272727272727,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.272727272727+A[(j+2)%N].y*-0.090909090909
+				 	       +A[(j+3)%N].y* 0.090909090909+A[(j+4)%N].y*-0.272727272727 };
+	
+		} else if (N == 6) {
+
+			for (var j=0; j<6; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.266666666667+A[(j+2)%N].x*-0.066666666667+A[(j+3)%N].x* 0.000000000000
+				 	       +A[(j+4)%N].x* 0.066666666667+A[(j+5)%N].x*-0.266666666667,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.266666666667+A[(j+2)%N].y*-0.066666666667+A[(j+3)%N].y* 0.000000000000
+				 	       +A[(j+4)%N].y* 0.066666666667+A[(j+5)%N].y*-0.266666666667 };
+
+		} else if (N == 7) {
+
+			for (var j=0; j<7; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.268292682927+A[(j+2)%N].x*-0.073170731707+A[(j+3)%N].x* 0.024390243902
+				 	       +A[(j+4)%N].x*-0.024390243902+A[(j+5)%N].x* 0.073170731707+A[(j+6)%N].x*-0.268292682927,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.268292682927+A[(j+2)%N].y*-0.073170731707+A[(j+3)%N].y* 0.024390243902
+				 	       +A[(j+4)%N].y*-0.024390243902+A[(j+5)%N].y* 0.073170731707+A[(j+6)%N].y*-0.268292682927 };
+
+		} else if (N == 8) {
+
+			for (var j=0; j<8; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.267857142857+A[(j+2)%N].x*-0.071428571429+A[(j+3)%N].x* 0.017857142857+A[(j+4)%N].x*-0.000000000000
+				 	       +A[(j+5)%N].x*-0.017857142857+A[(j+6)%N].x* 0.071428571429+A[(j+7)%N].x*-0.267857142857,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.267857142857+A[(j+2)%N].y*-0.071428571429+A[(j+3)%N].y* 0.017857142857+A[(j+4)%N].y*-0.000000000000
+				 	       +A[(j+5)%N].y*-0.017857142857+A[(j+6)%N].y* 0.071428571429+A[(j+7)%N].y*-0.267857142857 };
+
+		} else if (N == 9) {
+
+			for (var j=0; j<9; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.267973856209+A[(j+2)%N].x*-0.071895424837+A[(j+3)%N].x* 0.019607843137+A[(j+4)%N].x*-0.006535947712
+				 	       +A[(j+5)%N].x* 0.006535947712+A[(j+6)%N].x*-0.019607843137+A[(j+7)%N].x* 0.071895424837+A[(j+8)%N].x*-0.267973856209,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.267973856209+A[(j+2)%N].y*-0.071895424837+A[(j+3)%N].y* 0.019607843137+A[(j+4)%N].y*-0.006535947712
+				 	       +A[(j+5)%N].y* 0.006535947712+A[(j+6)%N].y*-0.019607843137+A[(j+7)%N].y* 0.071895424837+A[(j+8)%N].y*-0.267973856209 };
+
+		} else if (N == 10) {
+
+			for (var j=0; j<10; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.267942583732+A[(j+2)%N].x*-0.071770334928+A[(j+3)%N].x* 0.019138755981+A[(j+4)%N].x*-0.004784688995+A[(j+5)%N].x* 0.000000000000
+				 	       +A[(j+6)%N].x* 0.004784688995+A[(j+7)%N].x*-0.019138755981+A[(j+8)%N].x* 0.071770334928+A[(j+9)%N].x*-0.267942583732,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.267942583732+A[(j+2)%N].y*-0.071770334928+A[(j+3)%N].y* 0.019138755981+A[(j+4)%N].y*-0.004784688995+A[(j+5)%N].y* 0.000000000000
+				 	       +A[(j+6)%N].y* 0.004784688995+A[(j+7)%N].y*-0.019138755981+A[(j+8)%N].y* 0.071770334928+A[(j+9)%N].y*-0.267942583732 };
+
+		} else if (N&1) {
+
+			for (var j=0; j<N; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	       +A[(j+1)%N].x* 0.267973856209+A[(j+2)%N].x*-0.071895424837+A[(j+3)%N].x* 0.019607843137+A[(j+4)%N].x*-0.006535947712
+				 	       +A[(j-4+N)%N].x* 0.006535947712+A[(j-3+N)%N].x*-0.019607843137+A[(j-2+N)%N].x* 0.071895424837+A[(j-1+N)%N].x*-0.267973856209,
+					 'y': A[j].y* 1.000000000000
+				 	       +A[(j+1)%N].y* 0.267973856209+A[(j+2)%N].y*-0.071895424837+A[(j+3)%N].y* 0.019607843137+A[(j+4)%N].y*-0.006535947712
+				 	       +A[(j-4+N)%N].y* 0.006535947712+A[(j-3+N)%N].y*-0.019607843137+A[(j-2+N)%N].y* 0.071895424837+A[(j-1+N)%N].y*-0.267973856209 };
+
+		} else {
+
+			for (var j=0; j<N; j++)
+				B[j] = { 'x': A[j].x* 1.000000000000
+				 	 	      +A[(j+1)%N].x* 0.267942583732+A[(j+2)%N].x*-0.071770334928+A[(j+3)%N].x* 0.019138755981+A[(j+4)%N].x*-0.004784688995
+				 	 	      +A[(j-4+N)%N].x* 0.004784688995+A[(j-3+N)%N].x*-0.019138755981+A[(j-2+N)%N].x* 0.071770334928+A[(j-1+N)%N].x*-0.267942583732,
+					 'y': A[j].y* 1.000000000000
+				 	 	      +A[(j+1)%N].y* 0.267942583732+A[(j+2)%N].y*-0.071770334928+A[(j+3)%N].y* 0.019138755981+A[(j+4)%N].y*-0.004784688995
+				 	 	      +A[(j-4+N)%N].y* 0.004784688995+A[(j-3+N)%N].y*-0.019138755981+A[(j-2+N)%N].y* 0.071770334928+A[(j-1+N)%N].y*-0.267942583732 };
+
+		}
+
+		var round = Math.round;
+		for (var j=0; j<N; j++) {
+			B[j].x = round(B[j].x*10)/10;
+			B[j].y = round(B[j].y*10)/10;
+		}
+		for (var i=0; i<N; i++) {
+			C[i] = { 'x': 2*A[(i+1)%N].x - B[(i+1)%N].x, 'y': 2*A[(i+1)%N].y - B[(i+1)%N].y };
+		}
+	}
+
+	function calcControlsXYopen(A, B, C, wrap)
+	{
+		var N = A.length;
+		var W = [];
+
+		for (var i=0; i<N; i++)
+			W[i] = { 'x': A[i].x - wrap.x, 'y': A[i].y - wrap.y };
+		for (var i=0; i<N; i++)
+			W[N+i] = { 'x': A[i].x         , 'y': A[i].y          };
+		for (var i=0; i<N; i++)
+			W[N*2+i] = { 'x': A[i].x + wrap.x, 'y': A[i].y + wrap.y };
+
+		if (N == 3) {
+
+			for (var j=0; j<3; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.333333333333
+				 	       +W[N+(j-1)].x*-0.333333333333,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.333333333333
+				 	       +W[N+(j-1)].y*-0.333333333333 };
+
+		} else if (N == 4) {
+
+			for (var j=0; j<4; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.250000000000+W[N+(j+2)].x* 0.000000000000
+				 	       +W[N+(j-1)].x*-0.250000000000,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.250000000000+W[N+(j+2)].y* 0.000000000000
+				 	       +W[N+(j-1)].y*-0.250000000000 };
+
+		} else if (N == 5) {
+
+			for (var j=0; j<5; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.272727272727+W[N+(j+2)].x*-0.090909090909
+				 	       +W[N+(j-2)].x* 0.090909090909+W[N+(j-1)].x*-0.272727272727,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.272727272727+W[N+(j+2)].y*-0.090909090909
+				 	       +W[N+(j-2)].y* 0.090909090909+W[N+(j-1)].y*-0.272727272727 };
+	
+		} else if (N == 6) {
+
+			for (var j=0; j<6; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.266666666667+W[N+(j+2)].x*-0.066666666667+W[N+(j+3)].x* 0.000000000000
+				 	       +W[N+(j-2)].x* 0.066666666667+W[N+(j-1)].x*-0.266666666667,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.266666666667+W[N+(j+2)].y*-0.066666666667+W[N+(j+3)].y* 0.000000000000
+				 	       +W[N+(j-2)].y* 0.066666666667+W[N+(j-1)].y*-0.266666666667 };
+
+		} else if (N == 7) {
+
+			for (var j=0; j<7; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.268292682927+W[N+(j+2)].x*-0.073170731707+W[N+(j+3)].x* 0.024390243902
+				 	       +W[N+(j-3)].x*-0.024390243902+W[N+(j-2)].x* 0.073170731707+W[N+(j-1)].x*-0.268292682927,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.268292682927+W[N+(j+2)].y*-0.073170731707+W[N+(j+3)].y* 0.024390243902
+				 	       +W[N+(j-2)].y*-0.024390243902+W[N+(j-2)].y* 0.073170731707+W[N+(j-1)].y*-0.268292682927 };
+
+		} else if (N == 8) {
+
+			for (var j=0; j<8; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.267857142857+W[N+(j+2)].x*-0.071428571429+W[N+(j+3)].x* 0.017857142857+W[N+(j+4)].x*-0.000000000000
+				 	       +W[N+(j-3)].x*-0.017857142857+W[N+(j-2)].x* 0.071428571429+W[N+(j-1)].x*-0.267857142857,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.267857142857+W[N+(j+2)].y*-0.071428571429+W[N+(j+3)].y* 0.017857142857+W[N+(j+4)].y*-0.000000000000
+				 	       +W[N+(j-3)].y*-0.017857142857+W[N+(j-2)].y* 0.071428571429+W[N+(j-1)].y*-0.267857142857 };
+
+		} else if (N == 9) {
+
+			for (var j=0; j<9; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.267973856209+W[N+(j+2)].x*-0.071895424837+W[N+(j+3)].x* 0.019607843137+W[N+(j+4)].x*-0.006535947712
+				 	       +W[N+(j-4)].x* 0.006535947712+W[N+(j-3)].x*-0.019607843137+W[N+(j-2)].x* 0.071895424837+W[N+(j-1)].x*-0.267973856209,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.267973856209+W[N+(j+2)].y*-0.071895424837+W[N+(j+3)].y* 0.019607843137+W[N+(j+4)].y*-0.006535947712
+				 	       +W[N+(j-4)].y* 0.006535947712+W[N+(j-3)].y*-0.019607843137+W[N+(j-2)].y* 0.071895424837+W[N+(j-1)].y*-0.267973856209 };
+
+		} else if (N == 10) {
+
+			for (var j=0; j<10; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.267942583732+W[N+(j+2)].x*-0.071770334928+W[N+(j+3)].x* 0.019138755981+W[N+(j+4)].x*-0.004784688995+W[N+(j+5)].x* 0.000000000000
+				 	       +W[N+(j-4)].x* 0.004784688995+W[N+(j-3)].x*-0.019138755981+W[N+(j-2)].x* 0.071770334928+W[N+(j-1)].x*-0.267942583732,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.267942583732+W[N+(j+2)].y*-0.071770334928+W[N+(j+3)].y* 0.019138755981+W[N+(j+4)].y*-0.004784688995+W[N+(j+5)].y* 0.000000000000
+				 	       +W[N+(j-4)].y* 0.004784688995+W[N+(j-3)].y*-0.019138755981+W[N+(j-2)].y* 0.071770334928+W[N+(j-1)].y*-0.267942583732 };
+
+		} else if (N&1) {
+
+			for (var j=0; j<N; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	       +W[N+(j+1)].x* 0.267973856209+W[N+(j+2)].x*-0.071895424837+W[N+(j+3)].x* 0.019607843137+W[N+(j+4)].x*-0.006535947712
+				 	       +W[N+(j-4)].x* 0.006535947712+W[N+(j-3)].x*-0.019607843137+W[N+(j-2)].x* 0.071895424837+W[N+(j-1)].x*-0.267973856209,
+					 'y': W[N+j].y* 1.000000000000
+				 	       +W[N+(j+1)].y* 0.267973856209+W[N+(j+2)].y*-0.071895424837+W[N+(j+3)].y* 0.019607843137+W[N+(j+4)].y*-0.006535947712
+				 	       +W[N+(j-4)].y* 0.006535947712+W[N+(j-3)].y*-0.019607843137+W[N+(j-2)].y* 0.071895424837+W[N+(j-1)].y*-0.267973856209 };
+
+		} else {
+
+			for (var j=0; j<N; j++)
+				B[j] = { 'x': W[N+j].x* 1.000000000000
+				 	 	      +W[N+(j+1)].x* 0.267942583732+W[N+(j+2)].x*-0.071770334928+W[N+(j+3)].x* 0.019138755981+W[N+(j+4)].x*-0.004784688995
+				 	 	      +W[N+(j-4)].x* 0.004784688995+W[N+(j-3)].x*-0.019138755981+W[N+(j-2)].x* 0.071770334928+W[N+(j-1)].x*-0.267942583732,
+					 'y': W[N+j].y* 1.000000000000
+				 	 	      +W[N+(j+1)].y* 0.267942583732+W[N+(j+2)].y*-0.071770334928+W[N+(j+3)].y* 0.019138755981+W[N+(j+4)].y*-0.004784688995
+				 	 	      +W[N+(j-4)].y* 0.004784688995+W[N+(j-3)].y*-0.019138755981+W[N+(j-2)].y* 0.071770334928+W[N+(j-1)].y*-0.267942583732 };
+
+		}
+
+		var round = Math.round;
+		for (var i=0; i<N-1; i++) {
+			C[i] = { 'x': 2*W[N+i+1].x - B[(i+1)%N].x, 'y': 2*W[N+i+1].y - B[(i+1)%N].y };
+
+			C[i] = { 'x': 2*A[i+1].x - B[i+1].x, 'y': 2*A[i+1].y - B[i+1].y };
+		}
+			C[N-1] = { 'x': 2*W[N].x - B[0].x+wrap.x, 'y': 2*W[N].y - B[0].y+wrap.y };
+
+		for (var j=0; j<N; j++) {
+			B[j].x = round(B[j].x*10)/10;
+			B[j].y = round(B[j].y*10)/10;
+			C[j].x = round(C[j].x*10)/10;
+			C[j].y = round(C[j].y*10)/10;
+		}
+	}
+
+	function Slider(options)
+	{
+		var width = options.width;
+		var height = options.height;
+		var xmin = 20;
+		var xmax = width-xmin;
+
+
+		var __ = this;
+		__.curel = 0;
+		document.T = 0;
+
+		__.mousedown = function(event)
+		{
+			event.stop();
+			__.x0 = event.client.x;
+			var xy = this.getPosition(options.slider);
+			__.elx = xy.x;
+			__.curel = this;
+		}
+		__.mouseup = function(event)
+		{
+			event.stop();
+			__.curel = 0;
+			__.calc();
+		}
+		__.mousemove = function(event)
+		{
+			if (__.curel != 0) {
+				event.stop();
+				var x = __.elx + event.client.x - __.x0;
+				if (x < xmin-8)
+					x = xmin-8;
+				if (x > xmax-8)
+					x = xmax-8;
+				this.setPosition({ 'x': x, 'y':0 });
+
+				if (this.id == 'knob1') {
+					document.T = (x+8-xmin) / (xmax-xmin);
+				} else if (this.id == 'knob2') {
+					document.T = (x+8-xmin) / (xmax-xmin);
+					document.T += 1 - 1.0/3.0;
+					document.T = document.T-Math.floor(document.T);
+				} else if (this.id == 'knob3') {
+					document.T = (x+8-xmin) / (xmax-xmin);
+					document.T += 1 - 2.0/3.0;
+					document.T = document.T-Math.floor(document.T);
+				}
+				__.calc();
+			}
+		}
+
+		__.plot = function()
+		{
+			var t = document.T+0.0/3.0; t = t-Math.floor(t);
+			options.knobs[0].setPosition({ x:(xmax-xmin)*t+xmin-8, y:0 });
+			var t = document.T+1.0/3.0; t = t-Math.floor(t);
+			options.knobs[1].setPosition({ x:(xmax-xmin)*t+xmin-8, y:0 });
+			var t = document.T+2.0/3.0; t = t-Math.floor(t);
+			options.knobs[2].setPosition({ x:(xmax-xmin)*t+xmin-8, y:0 });
+		}
+
+		__.calc = function()
+		{
+		}
+
+		// attach mouse events
+		for (var i=0; i<options.knobs.length; i++) {
+			options.knobs[i].addEvent('mousedown', __.mousedown);
+			options.knobs[i].addEvent('mouseup', __.mouseup);
+			options.knobs[i].addEvent('mousemove', __.mousemove);
+		}
+
+		// container mousemove handler (in case mouse moves outside dot during gesture)
+		options.slider.addEvent('mousemove', function(event){
+			if (__.curel != 0) {
+				__.curel.fireEvent('mousemove', event);
+			}
+		});
+		options.slider.addEvent('mouseup', __.mouseup);
+
+		__.calc();
+	}
+
+	function Control(options)
+	{
+		var width = options.width;
+		var height = options.height;
+		var xmin = 20;
+		var xmax = width-xmin;
+		var ymin = height-10;
+		var ymax = 10;
+		var A,B,C;
+		var wrap = { 'x': xmax-xmin, 'y':0 };
+
+		var __ = this;
+		__.curel = 0;
+		__.dots = options.dots;
+		__.knobs = options.knobs;
+
+		__.mousedown = function(event)
+		{
+			event.stop();
+			__.x0 = event.client.x;
+			__.y0 = event.client.y;
+			__.elx = this.get('cx') *1;
+			__.ely = this.get('cy') *1;
+			__.curel = this;
+		}
+		__.mouseup = function(event)
+		{
+			event.stop();
+			__.curel = 0;
+			__.calc();
+		}
+		__.mousemove = function(event)
+		{
+			if (__.curel != 0) {
+				event.stop();
+				if (!options.fixedx)
+					this.set('cx', __.elx + event.client.x - __.x0);
+				var y = __.ely + event.client.y - __.y0;
+				if (ymin<ymax) {
+					if (y<ymin)
+						y = ymin;
+					if (y>ymax)
+						y = ymax;
+				} else {
+					if (y>height-ymax)
+						y = height-ymax;
+					if (y<height-ymin)
+						y = height-ymin;
+				}
+				this.set('cy', y);
+				__.calc();
+			}
+		}
+
+		__.setABC = function()
+		{
+			A = [];
+			B = [];
+			C = [];
+
+			// load path points and determine control point
+			for (var i=0; i<__.dots.length; i++) {
+				A[i] = { x: __.dots[i].get('cx') *1, y: __.dots[i].get('cy') *1 };
+			}
+			calcControlsXYopen(A, B, C, wrap);
+		}
+
+		__.calc = function()
+		{
+			__.setABC();
+			options.txt.set('text',JSON.encode(A));
+
+//			// snap to grid
+//			for (var i=0; i<__.dots.length; i++)
+//				B[i] = { x: Math.round(B[i].x), y: Math.round(B[i].y) };
+
+			// create layer that displays path -- don't close the loop
+			var d = 'M '+A[0].x+','+A[0].y;
+			for (var i=0; i<A.length-1; i++)
+				d += 'C '+B[i].x+','+B[i].y + ' '+C[i].x+','+C[i].y + ' '+A[i+1].x+','+A[i+1].y;
+			var i = A.length-1;
+			d += 'C '+B[i].x+','+B[i].y + ' '+C[i].x+','+C[i].y + ' '+(A[0].x+wrap.x)+','+(A[0].y+wrap.y);
+
+			options.path.set('d',d);
+		}
+
+		__.load = function(ini, yscale)
+		{
+			for (var i=0; i<__.dots.length; i++) {
+				__.dots[i].set('cx', ini[i].x);
+				__.dots[i].set('cy', Math.round(ini[i].y*yscale*1000)/1000);
+			}
+			__.calc();
+		}
+
+		__.addDots = function(m, t)
+		{
+			__.setABC();
+
+			// create 3 new elements
+			var n = __.dots.length/3;
+			// arg	var m = bestk % n;
+			// arg  var t = bestt;
+			for (var i=0; i<3; i++) {
+
+				var	x = A[((n+1)*i+m+1)%A.length].x*t*t*t+ C[((n+1)*i+m  )%A.length].x*t*t*(1-t)*3 + B[((n+1)*i+m  )%A.length].x*t*(1-t)*(1-t)*3 + A[((n+1)*i+m  )%A.length].x*(1-t)*(1-t)*(1-t);
+				var	y = A[((n+1)*i+m+1)%A.length].y*t*t*t+ C[((n+1)*i+m  )%A.length].y*t*t*(1-t)*3 + B[((n+1)*i+m  )%A.length].y*t*(1-t)*(1-t)*3 + A[((n+1)*i+m  )%A.length].y*(1-t)*(1-t)*(1-t);
+
+				x = Math.round(x*10)/10;
+				y = Math.round(y*10)/10;
+
+				var el = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+				el.setAttributeNS(null, 'id', 'x'+i);
+				el.setAttributeNS(null, 'fill', '#00f');
+				el.setAttributeNS(null, 'stroke', 'none');
+				el.setAttributeNS(null, 'rx', '4');
+				el.setAttributeNS(null, 'ry', '4');
+				el.set('cx', x);
+				el.set('cy', y);
+				el.setAttributeNS(null, 'stroke-width', '1');
+
+				__.dots.splice((n+1)*i+m+1, 0, el);
+				A.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+				B.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+				C.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+
+				el.inject(__.dots[(n+1)*i+m], 'after');
+
+				// add events to dot
+				el.addEvent('mousedown', __.mousedown);
+				el.addEvent('mouseup', __.mouseup);
+				el.addEvent('mousemove', __.mousemove);
+			}
+
+			// redistribute x-asis
+			if (options.fixedx) {
+				for (var i=0; i<__.dots.length; i++)
+					__.dots[i].set('cx', Math.round((xmax-xmin)*i/__.dots.length+xmin));
+			}
+
+			__.calc();
+		}
+
+		__.delDots = function(m)
+		{
+			__.setABC();
+
+			// delete dots
+			var n = __.dots.length/3;
+			// arg  var m = bestk % n;
+			for (var i=0; i<3; i++) {
+				__.dots[(n-1)*i+m].removeEvents();
+				__.dots[(n-1)*i+m].destroy();
+				__.dots.splice((n-1)*i+m, 1);
+				A.splice((n-1)*i+m, 1);
+				B.splice((n-1)*i+m, 1);
+				C.splice((n-1)*i+m, 1);
+			}
+
+			// redistribute x-asis
+			if (options.fixedx) {
+				for (var i=0; i<__.dots.length; i++)
+					__.dots[i].set('cx', Math.round((xmax-xmin)*i/__.dots.length+xmin));
+			}
+
+			__.calc();
+		}
+
+		__.txy = function(t)
+		{
+			t += 1;
+			t = t - Math.floor(t);
+
+			var n = Math.floor(__.dots.length * t);
+			t = __.dots.length*t - n;			
+
+			// convert to xy
+			if (n+1 == A.length) {
+				var x = (A[0].x+wrap.x)*t*t*t+ C[n].x*t*t*(1-t)*3 + B[n].x*t*(1-t)*(1-t)*3 + A[n].x*(1-t)*(1-t)*(1-t);
+				var y = (A[0].y+wrap.y)*t*t*t+ C[n].y*t*t*(1-t)*3 + B[n].y*t*(1-t)*(1-t)*3 + A[n].y*(1-t)*(1-t)*(1-t);
+				return { 'x':x, 'y': y };
+			} else {
+				var x = A[n+1].x*t*t*t+ C[n].x*t*t*(1-t)*3 + B[n].x*t*(1-t)*(1-t)*3 + A[n].x*(1-t)*(1-t)*(1-t);
+				var y = A[n+1].y*t*t*t+ C[n].y*t*t*(1-t)*3 + B[n].y*t*(1-t)*(1-t)*3 + A[n].y*(1-t)*(1-t)*(1-t);
+				return { 'x':x, 'y': y };
+			}
+		}
+
+		__.getv = function(t)
+		{
+			t += 1;
+			t = t - Math.floor(t);
+
+			var n = Math.floor(__.dots.length * t);
+			t = __.dots.length*t - n;			
+
+			var y;
+			if (n+1 == A.length) {
+				y = (A[0].y+wrap.y)*t*t*t+ C[n].y*t*t*(1-t)*3 + B[n].y*t*(1-t)*(1-t)*3 + A[n].y*(1-t)*(1-t)*(1-t);
+			} else {
+				y = A[n+1].y*t*t*t+ C[n].y*t*t*(1-t)*3 + B[n].y*t*(1-t)*(1-t)*3 + A[n].y*(1-t)*(1-t)*(1-t);
+			}
+
+			y =(y-ymin)/(ymax-ymin);
+			y = (options.vmax-options.vmin)*y+options.vmin;
+
+			y = Math.round(1000*y)/1000.0;
+
+			return y;
+		}
+
+		__.plot = function(t)
+		{
+			for (var i=0; i<3; i++) {
+				var xy = __.txy(t+i/3.0);
+				options.knobs[i].set('cx', xy.x);
+				options.knobs[i].set('cy', xy.y);
+			}
+		}
+
+		// set initial values
+		for (var i=0; i<__.dots.length; i++) {
+			__.dots[i].set('cx', Math.round((xmax-xmin)*i/__.dots.length+xmin));
+			var initial = (options.initial-options.vmin)/(options.vmax-options.vmin);
+			if (ymin<ymax)
+				__.dots[i].set('cy', Math.round((ymax-ymin)*initial+ymin));
+			else
+				__.dots[i].set('cy', Math.round(height-(ymin-ymax)*initial-ymax));
+		}
+
+		// attach mouse events
+		for (var i=0; i<__.dots.length; i++) {
+			__.dots[i].addEvent('mousedown', __.mousedown);
+			__.dots[i].addEvent('mouseup', __.mouseup);
+			__.dots[i].addEvent('mousemove', __.mousemove);
+		}
+
+		// container mousemove handler (in case mouse moves outside dot during gesture)
+		options.svg.addEvent('mousemove', function(event){
+			if (__.curel != 0) {
+				__.curel.fireEvent('mousemove', event);
+			}
+		});
+		options.svg.addEvent('mouseup', __.mouseup);
+
+		// initial draw
+		__.calc();
+	}
+
+	function Final(options)
+	{
+		var width = options.width;
+		var height = options.height;
+		var A,B,C;
+
+		var __ = this;
+		__.curel = 0;
+		__.dots = options.dots;
+		__.knobs = options.knobs;
+		__.pinL = options.pinL;
+		__.pinR = options.pinR;
+		__.xy = [];
+
+		__.mousedown = function(event)
+		{
+			event.stop();
+			__.x0 = event.client.x;
+			__.y0 = event.client.y;
+			__.elx = this.get('cx') *1;
+			__.ely = this.get('cy') *1;
+			__.curel = this;
+		}
+		__.mouseup = function(event)
+		{
+			event.stop();
+			__.curel = 0;
+			__.calc();
+		}
+		__.mousemove = function(event)
+		{
+			if (__.curel != 0) {
+				this.set('cx', __.elx + event.client.x - __.x0);
+				this.set('cy', __.ely + event.client.y - __.y0);
+				__.calc();
+			}
+		}
+
+		__.setABC = function()
+		{
+			A = [];
+			B = [];
+			C = [];
+
+			// load path points and determine control point
+			for (var i=0; i<__.dots.length; i++) {
+				A[i] = { x: __.dots[i].get('cx') *1, y: __.dots[i].get('cy') *1 };
+			}
+			calcControlsXY(A, B, C);
+		}
+
+		__.calc = function()
+		{
+			__.setABC();
+
+			options.txt.set('text',JSON.encode(A));
+
+//			// snap to grid
+//			for (var i=0; i<__.dots.length; i++)
+//				B[i] = { x: Math.round(B[i].x), y: Math.round(B[i].y) };
+
+			// create layer that displays path
+			var d = 'M '+A[0].x+','+A[0].y;
+			for (var i=0; i<A.length; i++)
+				d += 'C '+B[i].x+','+B[i].y + ' '+C[i].x+','+C[i].y + ' '+A[(i+1)%A.length].x+','+A[(i+1)%A.length].y;
+			d += 'z';
+
+			options.path.set('d',d);
+		}
+
+		__.load = function(ini)
+		{
+			for (var i=0; i<__.dots.length; i++) {
+				__.dots[i].set('cx', ini[i].x);
+				__.dots[i].set('cy', ini[i].y);
+			}
+			__.calc();
+		}
+
+		__.addDots = function(m, t)
+		{
+			__.setABC();
+
+			// create 3 new elements
+			var n = __.dots.length/3;
+			// arg	var m = bestk % n;
+			// arg  var t = bestt;
+			for (var i=0; i<3; i++) {
+
+				var	x = A[((n+1)*i+m+1)%A.length].x*t*t*t+ C[((n+1)*i+m  )%A.length].x*t*t*(1-t)*3 + B[((n+1)*i+m  )%A.length].x*t*(1-t)*(1-t)*3 + A[((n+1)*i+m  )%A.length].x*(1-t)*(1-t)*(1-t);
+				var	y = A[((n+1)*i+m+1)%A.length].y*t*t*t+ C[((n+1)*i+m  )%A.length].y*t*t*(1-t)*3 + B[((n+1)*i+m  )%A.length].y*t*(1-t)*(1-t)*3 + A[((n+1)*i+m  )%A.length].y*(1-t)*(1-t)*(1-t);
+
+				x = Math.round(x*10)/10;
+				y = Math.round(y*10)/10;
+
+				var el = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+				el.setAttributeNS(null, 'id', 'x'+i);
+				el.setAttributeNS(null, 'fill', '#00f');
+				el.setAttributeNS(null, 'stroke', 'none');
+				el.setAttributeNS(null, 'rx', '4');
+				el.setAttributeNS(null, 'ry', '4');
+				el.set('cx', x);
+				el.set('cy', y);
+				el.setAttributeNS(null, 'stroke-width', '1');
+
+				__.dots.splice((n+1)*i+m+1, 0, el);
+				A.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+				B.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+				C.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+
+				el.inject(__.dots[(n+1)*i+m], 'after');
+
+				// add events to dot
+				el.addEvent('mousedown', __.mousedown);
+				el.addEvent('mouseup', __.mouseup);
+				el.addEvent('mousemove', __.mousemove);
+			}
+
+			// redistribute x-asis
+			if (options.fixedx) {
+				for (var i=0; i<__.dots.length; i++)
+					__.dots[i].set('cx', Math.round((xmax-xmin)*i/__.dots.length+xmin));
+			}
+
+			__.calc();
+		}
+
+		__.addDotsEx = function(evtx, evty)
+		{
+			__.setABC();
+
+			var bestk = -1;
+			var bestdiff = -1;
+			var bestx = -1;
+			var besty = -1;
+			var bestt = 0;
+
+			var dots = __.dots;
+
+			// find segment and offset
+			for (var k=0; k<dots.length; k++) {
+
+				var x0 = A[k].x;
+				var y0 = A[k].y;
+				var x1 = B[k].x;
+				var y1 = B[k].y;
+				var x2 = C[k].x;
+				var y2 = C[k].y;
+				var x3 = A[(k+1)%dots.length].x;
+				var y3 = A[(k+1)%dots.length].y;
+
+				// ignore clicks near thumbs
+				var d = Math.sqrt((x0-evtx)*(x0-evtx)+(y0-evty)*(y0-evty));
+				if (d<10)
+					return;
+				
+				var n = 1000;
+				var sum = 0;
+				for (var i=1; i<n; i++) {
+					var t = i / n;
+					var t1 = 1 - t;
+
+					var a = t1*t1;
+					var d = t*t;
+					var b = t*a*3;
+					var c = t1*d*3;
+					a *= t1;
+					d *= t;
+
+					var x = a*x0 + b*x1 + c*x2 + d*x3;
+					var y = a*y0 + b*y1 + c*y2 + d*y3;
+
+					var d = Math.sqrt((x-evtx)*(x-evtx)+(y-evty)*(y-evty));
+					if (bestk < 0 || d < bestdiff) {
+						bestk = k;
+						bestdiff = d;
+						bestx = x;
+						besty = y;
+						bestt = t;
+					}
+				}
+			}
+			if (bestk < 0)
+				return;
+
+			// create 3 new elements
+			var n = dots.length/3;
+			var m = bestk % n;
+			var t = bestt;
+			for (var i=0; i<3; i++) {
+
+				var	x = A[((n+1)*i+m+1)%A.length].x*t*t*t+ C[((n+1)*i+m  )%A.length].x*t*t*(1-t)*3 + B[((n+1)*i+m  )%A.length].x*t*(1-t)*(1-t)*3 + A[((n+1)*i+m  )%A.length].x*(1-t)*(1-t)*(1-t);
+				var	y = A[((n+1)*i+m+1)%A.length].y*t*t*t+ C[((n+1)*i+m  )%A.length].y*t*t*(1-t)*3 + B[((n+1)*i+m  )%A.length].y*t*(1-t)*(1-t)*3 + A[((n+1)*i+m  )%A.length].y*(1-t)*(1-t)*(1-t);
+
+				x = Math.round(x*10)/10;
+				y = Math.round(y*10)/10;
+
+				var el = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+				el.setAttributeNS(null, 'id', 'x'+i);
+				el.setAttributeNS(null, 'fill', '#00f');
+				el.setAttributeNS(null, 'stroke', 'none');
+				el.setAttributeNS(null, 'rx', '4');
+				el.setAttributeNS(null, 'ry', '4');
+				el.set('cx', x);
+				el.set('cy', y);
+				el.setAttributeNS(null, 'stroke-width', '1');
+
+				dots.splice((n+1)*i+m+1, 0, el);
+				A.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+				B.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+				C.splice((n+1)*i+m+1, 0, {"x":x,"y":y});
+
+				el.inject(dots[(n+1)*i+m], 'after');
+
+				// add events to dot
+				el.addEvent('mousedown', __.mousedown);
+				el.addEvent('mouseup', __.mouseup);
+				el.addEvent('mousemove', __.mousemove);
+			}
+	
+			_.size.addDots(m, t);
+			_.rot.addDots(m, t);
+			_.wngsiz.addDots(m, t);
+			_.wngwid.addDots(m, t);
+			_.flap.addDots(m, t);
+			_.irissiz.addDots(m, t);
+			_.ulid.addDots(m, t);
+			_.dlid.addDots(m, t);
+
+			__.calc();
+		}
+
+		__.delDots = function(m)
+		{
+			__.setABC();
+
+			// delete dots
+			var n = __.dots.length/3;
+			// arg  var m = bestk % n;
+			for (var i=0; i<3; i++) {
+				__.dots[(n-1)*i+m].removeEvents();
+				__.dots[(n-1)*i+m].destroy();
+				__.dots.splice((n-1)*i+m, 1);
+				A.splice((n-1)*i+m, 1);
+				B.splice((n-1)*i+m, 1);
+				C.splice((n-1)*i+m, 1);
+			}
+
+			// redistribute x-asis
+			if (options.fixedx) {
+				for (var i=0; i<__.dots.length; i++)
+					__.dots[i].set('cx', Math.round((xmax-xmin)*i/__.dots.length+xmin));
+			}
+
+			__.calc();
+		}
+
+		__.delDotsEx = function(evtx, evty)
+		{
+			__.setABC();
+
+			var dots = __.dots;
+
+			var bestk = -1;
+			var bestdiff = -1;
+			var bestx = -1;
+			var besty = -1;
+			var bestt = 0;
+
+			// find segment and offset
+			for (var k=0; k<dots.length; k++) {
+
+				var x = A[k].x;
+				var y = A[k].y;
+
+				var d = Math.sqrt((x-evtx)*(x-evtx)+(y-evty)*(y-evty));
+				if (bestk < 0 || d < bestdiff) {
+					bestk = k;
+					bestdiff = d;
+					bestx = x;
+					besty = y;
+				}
+			}
+			if (bestk < 0)
+				return;
+
+			// delete dots
+			var n = dots.length/3;
+			var m = bestk % n;
+			for (var i=0; i<3; i++) {
+				dots[(n-1)*i+m].removeEvents();
+				dots[(n-1)*i+m].destroy();
+				dots.splice((n-1)*i+m, 1);
+				A.splice((n-1)*i+m, 1);
+				B.splice((n-1)*i+m, 1);
+				C.splice((n-1)*i+m, 1);
+			}
+	
+			_.size.delDots(m);
+			_.rot.delDots(m);
+			_.wngsiz.delDots(m);
+			_.wngwid.delDots(m);
+			_.flap.delDots(m);
+			_.irissiz.delDots(m);
+			_.ulid.delDots(m);
+			_.dlid.delDots(m);
+
+			__.calc();
+		}
+
+		__.txy = function(t)
+		{
+			t += 1;
+			t = t - Math.floor(t);
+
+			var n = Math.floor(__.dots.length * t);
+			t = __.dots.length*t - n;			
+
+			// convert to xy
+			var x = A[(n+1)%A.length].x*t*t*t+ C[n].x*t*t*(1-t)*3 + B[n].x*t*(1-t)*(1-t)*3 + A[n].x*(1-t)*(1-t)*(1-t);
+			var y = A[(n+1)%A.length].y*t*t*t+ C[n].y*t*t*(1-t)*3 + B[n].y*t*(1-t)*(1-t)*3 + A[n].y*(1-t)*(1-t)*(1-t);
+			return { 'x':x, 'y': y };
+		}
+
+		__.plot = function(t)
+		{
+			for (var i=0; i<3; i++) {
+				var xy = __.txy(t+i/3.0);
+				options.knobs[i].set('cx', xy.x);
+				options.knobs[i].set('cy', xy.y);
+				__.xy[i] = xy;
+			}
+
+			for (var i=0; i<3; i++) {
+				var siz = _.size.getv(t+i/3.0);
+				__.knobs[i].set('rx', siz);
+				__.knobs[i].set('ry', siz);
+			}
+
+			for (var i=0; i<3; i++) {
+				var rot = _.rot.getv(t+i/3.0);
+				var siz = _.size.getv(t+i/3.0); // radius
+				var wngsiz = _.wngsiz.getv(t+i/3.0);
+				var wngwid = _.wngwid.getv(t+i/3.0);
+				var flap = _.flap.getv(t+i/3.0);
+
+				var dx = -Math.cos(rot*2*Math.PI/360)*siz;
+				var dy = +Math.sin(rot*2*Math.PI/360)*siz;
+				
+				__.pinL[i].set('cx', __.xy[i].x+dx);
+				__.pinL[i].set('cy', __.xy[i].y+dy);
+
+				var affine2 = [ Math.cos(flap*30*2*Math.PI/360), Math.sin(flap*30*2*Math.PI/360), -Math.sin(flap*30*2*Math.PI/360), Math.cos(flap*30*2*Math.PI/360), 0, 0 ]; // rotate
+				var affine1 = [ wngsiz*wngwid, 0, 0, wngsiz, 0, 0 ]; // scale
+				var affine3 = [ Math.cos(-rot*2*Math.PI/360), Math.sin(-rot*2*Math.PI/360), -Math.sin(-rot*2*Math.PI/360), Math.cos(-rot*2*Math.PI/360), 0, 0 ]; // rotate
+
+if (1) {
+				for (var j=0; j<wingL.length; j++) {
+
+
+					var x = wingL[j].x;
+					var y = wingL[j].y;
+
+					var xx = (wingLmaxx-x-wingLhotx)/wingLmaxx;
+					var yy = (wingLmaxy-y-wingLhoty)/wingLmaxy;
+					yy *= (flap*.25*xx+1);
+					y = wingLmaxy-wingLhoty-yy*wingLmaxy;
+
+					var x2 = x*affine2[0] + y*affine2[2] + affine2[4];
+					var y2 = x*affine2[1] + y*affine2[3] + affine2[5];
+					x = x2;
+					y = y2;
+
+					var x = x*siz*2/wingLmaxx;
+					var y = y*siz*2/wingLmaxy;
+					var x2 = x*affine1[0] + y*affine1[2] + affine1[4];
+					var y2 = x*affine1[1] + y*affine1[3] + affine1[5];
+					x = x2;
+					y = y2;
+
+					var x2 = x*affine3[0] + y*affine3[2] + affine3[4];
+					var y2 = x*affine3[1] + y*affine3[3] + affine3[5];
+					x = x2;
+					y = y2;
+
+					wingLA[j] = { 'x': __.xy[i].x+dx+x, 'y': __.xy[i].y+dy+y };
+				}
+				calcControlsXY(wingLA, wingLB, wingLC);
+
+				// create layer that displays path
+				var d = 'M '+wingLA[0].x+','+wingLA[0].y;
+				for (var j=0; j<wingLA.length; j++)
+					d += 'C '+wingLB[j].x+','+wingLB[j].y + ' '+wingLC[j].x+','+wingLC[j].y + ' '+wingLA[(j+1)%wingLA.length].x+','+wingLA[(j+1)%wingLA.length].y;
+				d += 'z';
+
+				options.wingL[i].set('d', d);
+}
+
+
+				var dx = Math.cos(rot*2*Math.PI/360)*siz;
+				var dy = -Math.sin(rot*2*Math.PI/360)*siz;
+				
+				__.pinR[i].set('cx', __.xy[i].x+dx);
+				__.pinR[i].set('cy', __.xy[i].y+dy);
+
+
+				var affine2 = [ Math.cos(-flap*30*2*Math.PI/360),  Math.sin(-flap*30*2*Math.PI/360), -Math.sin(-flap*30*2*Math.PI/360), Math.cos(-flap*30*2*Math.PI/360), 0, 0 ]; // rotate
+				var affine1 = [ wngsiz*wngwid, 0, 0, wngsiz, 0, 0 ]; // scale
+				var affine3 = [ Math.cos(-rot*2*Math.PI/360), Math.sin(-rot*2*Math.PI/360), -Math.sin(-rot*2*Math.PI/360), Math.cos(-rot*2*Math.PI/360), 0, 0 ]; // rotate
+
+if (1) {
+				for (var j=0; j<wingL.length; j++) {
+
+					var x = -wingL[j].x;
+					var y =  wingL[j].y;
+
+					var xx = (wingLmaxx-x-wingLhotx)/wingLmaxx;
+					var yy = (wingLmaxy-y-wingLhoty)/wingLmaxy;
+					yy *= (-flap*.25*xx+1);
+					y = wingLmaxy-wingLhoty-yy*wingLmaxy;
+
+					var x2 = x*affine2[0] + y*affine2[2] + affine2[4];
+					var y2 = x*affine2[1] + y*affine2[3] + affine2[5];
+					x = x2;
+					y = y2;
+
+					var x = x*siz*2/wingLmaxx;
+					var y = y*siz*2/wingLmaxy;
+					var x2 = x*affine1[0] + y*affine1[2] + affine1[4];
+					var y2 = x*affine1[1] + y*affine1[3] + affine1[5];
+					x = x2;
+					y = y2;
+
+					var x2 = x*affine3[0] + y*affine3[2] + affine3[4];
+					var y2 = x*affine3[1] + y*affine3[3] + affine3[5];
+					x = x2;
+					y = y2;
+
+					wingLA[j] = { 'x': __.xy[i].x+dx+x, 'y': __.xy[i].y+dy+y };
+
+				}
+				calcControlsXY(wingLA, wingLB, wingLC);
+
+				// create layer that displays path
+				var d = 'M '+wingLA[0].x+','+wingLA[0].y;
+				for (var j=0; j<wingLA.length; j++)
+					d += 'C '+wingLB[j].x+','+wingLB[j].y + ' '+wingLC[j].x+','+wingLC[j].y + ' '+wingLA[(j+1)%wingLA.length].x+','+wingLA[(j+1)%wingLA.length].y;
+				d += 'z';
+
+				options.wingR[i].set('d', d);
+}
+
+			}
+//-----------
+
+
+
+		}
+
+//		// set initial values
+//		for (var i=0; i<__.dots.length; i++) {
+//			__.dots[i].set('cx', Math.round((xmax-xmin)*i/__.dots.length+xmin));
+//			if (ymin<ymax)
+//				__.dots[i].set('cy', Math.round((ymax-ymin)*.5+ymin));
+//			else
+//				__.dots[i].set('cy', Math.round(height-(ymin-ymax)*.5-ymax));
+//		}
+
+		// attach mouse events
+		for (var i=0; i<__.dots.length; i++) {
+			__.dots[i].addEvent('mousedown', __.mousedown);
+			__.dots[i].addEvent('mouseup', __.mouseup);
+			__.dots[i].addEvent('mousemove', __.mousemove);
+		}
+
+		// container mousemove handler (in case mouse moves outside dot during gesture)
+		options.svg.addEvent('mousemove', function(event){
+			if (__.curel != 0) {
+				__.curel.fireEvent('mousemove', event);
+			}
+		});
+		options.svg.addEvent('mouseup', __.mouseup);
+
+		// initial draw
+		__.calc();
+	}
+
+	function ttorgb(t)
+	{
+		t = t-Math.floor(t);
+		t *= 6;
+
+		if (t < 1) {
+			return {'r': 255, 'g': Math.round((t-0)*255), 'b': 0 };
+		} else if (t < 2) {
+			return {'r': Math.round((2-t)*255), 'g': 255, 'b': 0 };
+		} else if (t < 3) {
+			return {'r': 0, 'g': 255, 'b': Math.round((t-2)*255) };
+		} else if (t < 4) {
+			return {'r': 0, 'g': Math.round((4-t)*255), 'b': 255 };
+		} else if (t < 5) {
+			return {'r': Math.round((t-4)*255), 'g': 0, 'b': 255 };
+		} else {
+			return {'r': 255, 'g': 0, 'b': Math.round((6-t)*255) };
+		}
+	}
+
+	function render(z, t)
+	{
+//if (z != 0) return;
+		// get size
+		var wngsiz = _.wngsiz.getv(t);
+		var wngwid = _.wngwid.getv(t);
+		var flap = _.flap.getv(t);
+		var siz = Math.round(_.size.getv(t));
+		var rot = _.rot.getv(t);
+		var irissiz = Math.round(siz * _.irissiz.getv(t));
+		var x0 = Math.round(_.final.xy[z].x);
+		var y0 = Math.round(_.final.xy[z].y);
+
+		var cr = 255*(z==0);
+		var cg = 255*(z==1);
+		var cb = 255*(z==2);
+
+		// eye-white
+		_.ctx.fillStyle = '#ffffff';
+		_.ctx.strokeStyle = '#000000';
+		_.ctx.lineWidth = 2;
+		_.ctx.beginPath();
+		_.ctx.arc(x0,y0,siz,0,2*Math.PI);
+		_.ctx.fill();
+
+		// prepare wing stroke/fill
+		if (z==0)
+			_.ctx.fillStyle = '#f00';
+		else if (z==1)
+			_.ctx.fillStyle = '#0f0';
+		else
+			_.ctx.fillStyle = '#00f';
+		_.ctx.strokeStyle = '#000000';
+
+		var affine2 = [ Math.cos(flap*30*2*Math.PI/360), Math.sin(flap*30*2*Math.PI/360), -Math.sin(flap*30*2*Math.PI/360), Math.cos(flap*30*2*Math.PI/360), 0, 0 ]; // rotate
+		var affine1 = [ wngsiz*wngwid, 0, 0, wngsiz, 0, 0 ]; // scale
+		var affine3 = [ Math.cos(-rot*2*Math.PI/360), Math.sin(-rot*2*Math.PI/360), -Math.sin(-rot*2*Math.PI/360), Math.cos(-rot*2*Math.PI/360), 0, 0 ]; // rotate
+
+		// L wing
+		var dx = -Math.cos(rot*2*Math.PI/360)*siz;
+		var dy = +Math.sin(rot*2*Math.PI/360)*siz;
+		for (var j=0; j<wingL.length; j++) {
+
+			var x = wingL[j].x;
+			var y = wingL[j].y;
+
+			var xx = (wingLmaxx-x-wingLhotx)/wingLmaxx;
+			var yy = (wingLmaxy-y-wingLhoty)/wingLmaxy;
+			yy *= (flap*.25*xx+1);
+			y = wingLmaxy-wingLhoty-yy*wingLmaxy;
+
+			var x2 = x*affine2[0] + y*affine2[2] + affine2[4];
+			var y2 = x*affine2[1] + y*affine2[3] + affine2[5];
+			x = x2;
+			y = y2;
+
+			var x = x*siz*2/wingLmaxx;
+			var y = y*siz*2/wingLmaxy;
+			var x2 = x*affine1[0] + y*affine1[2] + affine1[4];
+			var y2 = x*affine1[1] + y*affine1[3] + affine1[5];
+			x = x2;
+			y = y2;
+
+			var x2 = x*affine3[0] + y*affine3[2] + affine3[4];
+			var y2 = x*affine3[1] + y*affine3[3] + affine3[5];
+			x = x2;
+			y = y2;
+
+			wingLA[j] = { 'x': x0+dx+x, 'y': y0+dy+y };
+		}
+		calcControlsXY(wingLA, wingLB, wingLC);
+
+		// create layer that displays path
+		_.ctx.beginPath();
+		_.ctx.moveTo(wingLA[0].x, wingLA[0].y);
+		for (var j=0; j<wingLA.length; j++)
+			_.ctx.bezierCurveTo(wingLB[j].x, wingLB[j].y, wingLC[j].x, wingLC[j].y, wingLA[(j+1)%wingLA.length].x, wingLA[(j+1)%wingLA.length].y);
+		_.ctx.stroke();
+		_.ctx.fill();
+
+		var affine2 = [ Math.cos(-flap*30*2*Math.PI/360),  Math.sin(-flap*30*2*Math.PI/360), -Math.sin(-flap*30*2*Math.PI/360), Math.cos(-flap*30*2*Math.PI/360), 0, 0 ]; // rotate
+		var affine1 = [ wngsiz*wngwid, 0, 0, wngsiz, 0, 0 ]; // scale
+		var affine3 = [ Math.cos(-rot*2*Math.PI/360), Math.sin(-rot*2*Math.PI/360), -Math.sin(-rot*2*Math.PI/360), Math.cos(-rot*2*Math.PI/360), 0, 0 ]; // rotate
+
+		// Rwing
+		var dx = Math.cos(rot*2*Math.PI/360)*siz;
+		var dy = -Math.sin(rot*2*Math.PI/360)*siz;
+		for (var j=0; j<wingL.length; j++) {
+
+			var x = -wingL[j].x;
+			var y =  wingL[j].y;
+
+			var xx = (wingLmaxx-x-wingLhotx)/wingLmaxx;
+			var yy = (wingLmaxy-y-wingLhoty)/wingLmaxy;
+			yy *= (-flap*.25*xx+1);
+			y = wingLmaxy-wingLhoty-yy*wingLmaxy;
+
+			var x2 = x*affine2[0] + y*affine2[2] + affine2[4];
+			var y2 = x*affine2[1] + y*affine2[3] + affine2[5];
+			x = x2;
+			y = y2;
+
+			var x = x*siz*2/wingLmaxx;
+			var y = y*siz*2/wingLmaxy;
+
+			var x2 = x*affine1[0] + y*affine1[2] + affine1[4];
+			var y2 = x*affine1[1] + y*affine1[3] + affine1[5];
+			x = x2;
+			y = y2;
+			var x2 = x*affine3[0] + y*affine3[2] + affine3[4];
+			var y2 = x*affine3[1] + y*affine3[3] + affine3[5];
+			x = x2;
+			y = y2;
+
+			wingLA[j] = { 'x': x0+dx+x, 'y': y0+dy+y };
+		}
+		calcControlsXY(wingLA, wingLB, wingLC);
+
+		// create layer that displays path
+		_.ctx.beginPath();
+		_.ctx.moveTo(wingLA[0].x, wingLA[0].y);
+		for (var j=0; j<wingLA.length; j++)
+			_.ctx.bezierCurveTo(wingLB[j].x, wingLB[j].y, wingLC[j].x, wingLC[j].y, wingLA[(j+1)%wingLA.length].x, wingLA[(j+1)%wingLA.length].y);
+		_.ctx.stroke();
+		_.ctx.fill();
+//-----
+
+
+		// bitmap mode
+		var img = _.ctx.getImageData(0,0,720,405);
+		var data = img.data;
+
+		var y = y0;
+		for (var y=y0-siz; y<y0+siz; y++) {
+		if (y<0||y>=405) continue;
+		for (var x=x0-siz; x<x0+siz; x++) {
+			if (x<0||x>=720) continue;
+
+			var dx = x-x0;
+			var dy = y-y0;
+			var r = Math.sqrt(dx*dx+dy*dy);
+			if (r < irissiz) {
+
+				var a = Math.atan2(dy,dx);
+
+				a += Math.PI;
+				a += Math.pow(r,0.41);
+				a /= 2*Math.PI; //scale -0.5 .. +0.5
+				a += 0.5; // transform 0..1
+				a += t*10;
+
+				var rgb = ttorgb(a);
+
+				var i = y*720*4+x*4;
+				data[i++] = rgb.r;
+				data[i++] = rgb.g;
+				data[i  ] = rgb.b;
+			} else if (r < siz) {
+				var i = y*720*4+x*4;
+				// white
+				data[i++] = 255;
+				data[i++] = 255;
+				data[i  ] = 255;
+			}
+		}}
+
+		// vector mode
+		_.ctx.putImageData(img,0,0);
+
+		// upper lid
+
+		var ulid = _.ulid.getv(t);
+if (ulid<0) ulid = 0;
+if (ulid>1) ulid = 1;
+		var lAx = -Math.cos(rot*2*Math.PI/360)*siz; // left
+		var lAy = Math.sin(rot*2*Math.PI/360)*siz;
+		var lBx = -Math.sin(rot*2*Math.PI/360)*siz*ulid; // upper
+		var lBy = -Math.cos(rot*2*Math.PI/360)*siz*ulid;
+		var lCx = Math.cos(rot*2*Math.PI/360)*siz; // right
+		var lCy = -Math.sin(rot*2*Math.PI/360)*siz;
+
+		_.ctx.fillStyle = '#000000';
+		_.ctx.strokeStyle = '#ffffff';
+//		_.ctx.fillRect(x0+lAx-3,y0+lAy-3,6,6);
+//		_.ctx.fillRect(x0+lBx-3,y0+lBy-3,6,6);
+//		_.ctx.fillRect(x0+lCx-3,y0+lCy-3,6,6);
+
+		var yDelta_a = lBy - lAy;
+		var xDelta_a = lBx - lAx;
+		var yDelta_b = lCy - lBy;
+		var xDelta_b = lCx - lBx;
+		var aSlope = yDelta_a/xDelta_a;
+		var bSlope = yDelta_b/xDelta_b;
+		var centerx = (aSlope*bSlope*(lAy - lCy) + bSlope*(lAx + lBx) - aSlope*(lBx+lCx) )/(2* (bSlope-aSlope) );
+		var centery = -1*(centerx - (lAx+lBx)/2)/aSlope +  (lAy+lBy)/2;
+//		_.ctx.fillRect(x0+centerx-3,y0+centery-3,6,6);
+
+		_.ctx.strokeStyle = '#000000';
+		_.ctx.lineWidth = 2;
+		_.ctx.beginPath();
+
+		_.ctx.moveTo(x0+lAx, y0+lAy);
+
+		var a2 = Math.atan2(lAy-centery,lAx-centerx);
+		var a3 = Math.atan2(lCy-centery,lCx-centerx);
+		_.ctx.lineWidth = 3;
+		_.ctx.arc(x0+centerx,y0+centery, Math.sqrt((centerx-lAx)*(centerx-lAx)+(centery-lAy)*(centery-lAy)), a2, a3);
+		var a2 = Math.atan2(lAy-0,lAx-0);
+		var a3 = Math.atan2(lCy-0,lCx-0);
+		_.ctx.lineWidth = 1;
+		_.ctx.arc(x0+0,y0+0, Math.sqrt((0-lAx)*(0-lAx)+(0-lAy)*(0-lAy)), a3, a2, true);
+
+		_.ctx.closePath();
+		_.ctx.fill();
+		_.ctx.stroke();
+
+		// lower lid
+
+		var dlid = 1-_.dlid.getv(t);
+if (dlid<0) dlid = 0;
+if (dlid>1) dlid = 1;
+		var lAx = -Math.cos(rot*2*Math.PI/360)*siz; // left
+		var lAy = Math.sin(rot*2*Math.PI/360)*siz;
+		var lBx = Math.sin(rot*2*Math.PI/360)*siz*dlid; // lower
+		var lBy = Math.cos(rot*2*Math.PI/360)*siz*dlid;
+		var lCx = Math.cos(rot*2*Math.PI/360)*siz; // right
+		var lCy = -Math.sin(rot*2*Math.PI/360)*siz;
+
+		_.ctx.fillStyle = '#000000';
+		_.ctx.strokeStyle = '#ffffff';
+//		_.ctx.fillRect(x0+lAx-3,y0+lAy-3,6,6);
+//		_.ctx.fillRect(x0+lBx-3,y0+lBy-3,6,6);
+//		_.ctx.fillRect(x0+lCx-3,y0+lCy-3,6,6);
+
+		var yDelta_a = lBy - lAy;
+		var xDelta_a = lBx - lAx;
+		var yDelta_b = lCy - lBy;
+		var xDelta_b = lCx - lBx;
+		var aSlope = yDelta_a/xDelta_a;
+		var bSlope = yDelta_b/xDelta_b;
+		var centerx = (aSlope*bSlope*(lAy - lCy) + bSlope*(lAx + lBx) - aSlope*(lBx+lCx) )/(2* (bSlope-aSlope) );
+		var centery = -1*(centerx - (lAx+lBx)/2)/aSlope +  (lAy+lBy)/2;
+//		_.ctx.fillRect(x0+centerx-3,y0+centery-3,6,6);
+
+		_.ctx.strokeStyle = '#000000';
+		_.ctx.lineWidth = 2;
+		_.ctx.beginPath();
+
+		_.ctx.moveTo(x0+lCx, y0+lCy);
+
+		var a2 = Math.atan2(lAy-centery,lAx-centerx);
+		var a3 = Math.atan2(lCy-centery,lCx-centerx);
+		_.ctx.lineWidth = 3;
+		_.ctx.arc(x0+centerx,y0+centery, Math.sqrt((centerx-lAx)*(centerx-lAx)+(centery-lAy)*(centery-lAy)), a2, a3, true);
+		var a2 = Math.atan2(lAy-0,lAx-0);
+		var a3 = Math.atan2(lCy-0,lCx-0);
+		_.ctx.lineWidth = 1;
+		_.ctx.arc(x0+0,y0+0, Math.sqrt((0-lAx)*(0-lAx)+(0-lAy)*(0-lAy)), a3, a2);
+
+		_.ctx.closePath();
+		_.ctx.fill();
+		_.ctx.stroke();
+
+	}
+
+	window.addEvent('domready', function() {
+		var x0=0, y0=0,elx=-1,ely=-1;
+		_.curel = 0;
+
+		_.addSelected = false;
+		_.delSelected = false;
+		_.wireSelected = true;
+		_.fillSelected = true;
+		_.pauseSelected = false;
+	
+		document.id('badd').setStyle('border', 'none');
+		document.id('bdel').setStyle('border', 'none');
+		document.id('bwire').setStyle('border', _.wireSelected ? 'red 1px solid' : 'none');
+		document.id('bfill').setStyle('border', _.fillSelected ? 'red 1px solid' : 'none');
+		document.id('bpause').setStyle('border', _.pauseSelected ? 'red 1px solid' : 'none');
+		document.id('svg').setStyle('display', _.wireSelected ? 'block' : 'none');
+		document.id('myCanvas').setStyle('display', _.fillSelected ? 'block' : 'none');
+
+		_.slider = new Slider({
+			'slider': document.id('slider'),
+			'knobs': [ document.id('knob1'), document.id('knob2'), document.id('knob3') ],
+			'width': 720,
+			'height': 16,
+		});
+
+		_.final = new Final({
+			'svg': document.id('svg'),
+			'dots': [ document.id('dot1'), document.id('dot2'), document.id('dot3'),
+				  document.id('dot4'), document.id('dot5'), document.id('dot6') ],
+			'path': document.id('path'),
+			'knobs': [ document.id('eye1'), document.id('eye2'), document.id('eye3') ],
+			'pinL': [ document.id('pinL1'), document.id('pinL2'), document.id('pinL3') ],
+			'pinR': [ document.id('pinR1'), document.id('pinR2'), document.id('pinR3') ],
+			'wingL': [ document.id('wingL1'), document.id('wingL2'), document.id('wingL3') ],
+			'wingR': [ document.id('wingR1'), document.id('wingR2'), document.id('wingR3') ],
+			'txt': document.id('txtA'),
+			'width': 720,
+			'height': 405,
+		});
+
+		_.size = new Control({
+			'svg': document.id('size'),
+			'dots': [ document.id('sizedot1'), document.id('sizedot2'), document.id('sizedot3'),
+				  document.id('sizedot4'), document.id('sizedot5'), document.id('sizedot6') ],
+			'path': document.id('sizepath'),
+			'knobs': [ document.id('sizeknob1'), document.id('sizeknob2'), document.id('sizeknob3') ],
+			'txt': document.id('sizetxt'),
+			'width': 720,
+			'height': 100,
+			'fixedx': true,
+			'vmin': 4,
+			'vmax': 200,
+			'initial': 100, // 0.5,
+		});
+
+		_.rot = new Control({
+			'svg': document.id('rot'),
+			'dots': [ document.id('rotdot1'), document.id('rotdot2'), document.id('rotdot3'),
+				  document.id('rotdot4'), document.id('rotdot5'), document.id('rotdot6') ],
+			'path': document.id('rotpath'),
+			'knobs': [ document.id('rotknob1'), document.id('rotknob2'), document.id('rotknob3') ],
+			'txt': document.id('rottxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': -60,
+			'vmax': +60,
+			'initial': 0, // 0.5,
+		});
+
+		_.wngsiz = new Control({
+			'svg': document.id('wngsiz'),
+			'dots': [ document.id('wngsizdot1'), document.id('wngsizdot2'), document.id('wngsizdot3'),
+				  document.id('wngsizdot4'), document.id('wngsizdot5'), document.id('wngsizdot6') ],
+			'path': document.id('wngsizpath'),
+			'knobs': [ document.id('wngsizknob1'), document.id('wngsizknob2'), document.id('wngsizknob3') ],
+			'txt': document.id('wngsiztxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': 0.5,
+			'vmax': 2.0,
+			'initial': 1, // (1.0-0.5)/(2.0-0.5),
+		});
+		_.wngwid = new Control({
+			'svg': document.id('wngwid'),
+			'dots': [ document.id('wngwiddot1'), document.id('wngwiddot2'), document.id('wngwiddot3'),
+				  document.id('wngwiddot4'), document.id('wngwiddot5'), document.id('wngwiddot6') ],
+			'path': document.id('wngwidpath'),
+			'knobs': [ document.id('wngwidknob1'), document.id('wngwidknob2'), document.id('wngwidknob3') ],
+			'txt': document.id('wngwidtxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': 0.1,
+			'vmax': 1.9,
+			'initial': 0.7,
+		});
+		_.flap = new Control({
+			'svg': document.id('flap'),
+			'dots': [ document.id('flapdot1'), document.id('flapdot2'), document.id('flapdot3'),
+				  document.id('flapdot4'), document.id('flapdot5'), document.id('flapdot6') ],
+			'path': document.id('flappath'),
+			'knobs': [ document.id('flapknob1'), document.id('flapknob2'), document.id('flapknob3') ],
+			'txt': document.id('flaptxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': -1,
+			'vmax': +1,
+			'initial': 0,
+		});
+
+		_.irissiz = new Control({
+			'svg': document.id('irissiz'),
+			'dots': [ document.id('irissizdot1'), document.id('irissizdot2'), document.id('irissizdot3'),
+				  document.id('irissizdot4'), document.id('irissizdot5'), document.id('irissizdot6') ],
+			'path': document.id('irissizpath'),
+			'knobs': [ document.id('irissizknob1'), document.id('irissizknob2'), document.id('irissizknob3') ],
+			'txt': document.id('irissiztxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': 0.1,
+			'vmax': 1.0,
+			'initial': 0.65,
+		});
+		_.ulid = new Control({
+			'svg': document.id('ulid'),
+			'dots': [ document.id('uliddot1'), document.id('uliddot2'), document.id('uliddot3'),
+				  document.id('uliddot4'), document.id('uliddot5'), document.id('uliddot6') ],
+			'path': document.id('ulidpath'),
+			'knobs': [ document.id('ulidknob1'), document.id('ulidknob2'), document.id('ulidknob3') ],
+			'txt': document.id('ulidtxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': 0,
+			'vmax': 1,
+			'initial': 0.8,
+		});
+		_.dlid = new Control({
+			'svg': document.id('dlid'),
+			'dots': [ document.id('dliddot1'), document.id('dliddot2'), document.id('dliddot3'),
+				  document.id('dliddot4'), document.id('dliddot5'), document.id('dliddot6') ],
+			'path': document.id('dlidpath'),
+			'knobs': [ document.id('dlidknob1'), document.id('dlidknob2'), document.id('dlidknob3') ],
+			'txt': document.id('dlidtxt'),
+			'width': 720,
+			'height': 72,
+			'fixedx': true,
+			'vmin': 0,
+			'vmax': 1,
+			'initial': 0.2,
+		});
+
+		document.id('badd').addEvent('click', function(event) {
+			if (!_.addSelected) {
+				document.id(this).setStyle('border', 'red 1px solid');
+			} else {
+				document.id(this).setStyle('border', 'none');
+			}
+			_.addSelected = !_.addSelected;
+
+			document.id('bdel').setStyle('border', 'none');
+			_.delSelected = false;
+		});
+
+		document.id('bdel').addEvent('click', function(event) {
+			if (!_.delSelected) {
+				document.id(this).setStyle('border', 'red 1px solid');
+			} else {
+				document.id(this).setStyle('border', 'none');
+			}
+			_.delSelected = !_.delSelected;
+
+			document.id('badd').setStyle('border', 'none');
+			_.addSelected = false;
+		});
+		document.id('bwire').addEvent('click', function(event) {
+			_.wireSelected = !_.wireSelected;
+
+			document.id('bwire').setStyle('border', _.wireSelected ? 'red 1px solid' : 'none');
+			document.id('svg').setStyle('display', _.wireSelected ? 'block' : 'none');
+		});
+		document.id('bfill').addEvent('click', function(event) {
+			_.fillSelected = !_.fillSelected;
+
+			document.id('bfill').setStyle('border', _.fillSelected ? 'red 1px solid' : 'none');
+			document.id('myCanvas').setStyle('display', _.fillSelected ? 'block' : 'none');
+		});
+		document.id('bpause').addEvent('click', function(event) {
+			_.pauseSelected = !_.pauseSelected;
+			document.id('bpause').setStyle('border', _.pauseSelected ? 'red 1px solid' : 'none');
+		});
+
+		document.id('svg').addEvent('click', function(event){
+
+			if (_.addSelected) {
+				_.addSelected = false;
+				document.id('badd').setStyle('border', 'none');
+
+				event.stop();
+				var svg = document.id('svg');
+//				if (svg.id != event.target.id)
+//					return;
+
+				// svg top-left is not body top-left
+				var parentPosition = event.target.getParent().getPosition();
+				evtx = event.client.x - parentPosition.x;
+				evty = event.client.y - parentPosition.y;
+
+				_.final.addDotsEx(evtx, evty);
+				return;
+			}
+
+			if (_.delSelected) {
+				_.delSelected = false;
+				document.id('bdel').setStyle('border', 'none');
+
+				event.stop();
+				var svg = document.id('svg');
+//				if (svg.id != event.target.id)
+//					return;
+
+				// svg top-left is not body top-left
+				var parentPosition = event.target.getParent().getPosition();
+				evtx = event.client.x - parentPosition.x;
+				evty = event.client.y - parentPosition.y;
+
+				_.final.delDotsEx(evtx, evty);
+				return;
+			}
+		});
+
+		// initial position
+		var A = [ {x: 164, y:42 }, {x: 72, y:159 }, { x: 214, y: 244 }, { x: 147, y: 152 }, { x: 194, y: 101 } ];
+		var A = [{"x":181,"y":383},{"x":264,"y":174},{"x":336,"y":380},{"x":194,"y":118},{"x":334,"y":128}];
+		var A = [{"x":36,"y":181},{"x":243,"y":477},{"x":216,"y":190},{"x":441,"y":366},{"x":323,"y":78}];
+		var A = [{"x":185,"y":369},{"x":203,"y":140},{"x":297,"y":316},{"x":132,"y":261},{"x":300,"y":173}, {"x":500,"y":216}];
+var A = [{"x":349,"y":220},{"x":556,"y":83},{"x":620,"y":327},{"x":368,"y":318},{"x":170,"y":363},{"x":152,"y":101}];
+		for (var i=0; i<_.final.dots.length; i++) {
+			_.final.dots[i].set('cx', A[i].x);
+			_.final.dots[i].set('cy', A[i].y);
+		}
+		// calculate+display
+		_.final.calc();
+
+var A = [{"x":20,"y":16},{"x":133,"y":50},{"x":247,"y":50},{"x":360,"y":84},{"x":473,"y":67},{"x":587,"y":61}];
+		for (var i=0; i<_.size.dots.length; i++) {
+			_.size.dots[i].set('cx', A[i].x);
+			_.size.dots[i].set('cy', A[i].y);
+		}
+		_.size.calc();
+
+var A = [{"x":20,"y":16},{"x":133,"y":50},{"x":247,"y":50},{"x":360,"y":84},{"x":473,"y":67},{"x":587,"y":61}];
+		for (var i=0; i<_.rot.dots.length; i++) {
+//			_.rot.dots[i].set('cx', A[i].x);
+//			_.rot.dots[i].set('cy', A[i].y);
+		}
+		_.rot.calc();
+
+var initialPos = [{"x":349,"y":220},{"x":556,"y":83},{"x":620,"y":327},{"x":368,"y":318},{"x":170,"y":363},{"x":152,"y":101}];
+var initialSize = [{"x":20,"y":16},{"x":133,"y":50},{"x":247,"y":50},{"x":360,"y":84},{"x":473,"y":67},{"x":587,"y":61}];
+var initialRotate = [{"x":20,"y":25},{"x":133,"y":27},{"x":247,"y":22},{"x":360,"y":29},{"x":473,"y":25},{"x":587,"y":25}];
+var initialWingSize = [{"x":20,"y":30},{"x":133,"y":30},{"x":247,"y":30},{"x":360,"y":30},{"x":473,"y":30},{"x":587,"y":30}];
+var initialWingWidth = [{"x":20,"y":34},{"x":133,"y":30},{"x":247,"y":30},{"x":360,"y":30},{"x":473,"y":30},{"x":587,"y":30}];
+var initialFlap = [{"x":20,"y":25},{"x":133,"y":25},{"x":247,"y":25},{"x":360,"y":25},{"x":473,"y":15},{"x":587,"y":28}];
+var initialIrisSize = [{"x":20,"y":14},{"x":133,"y":22},{"x":247,"y":22},{"x":360,"y":22},{"x":473,"y":22},{"x":587,"y":22}];
+var initialUlid = [{"x":20,"y":10},{"x":133,"y":16},{"x":247,"y":16},{"x":360,"y":27},{"x":473,"y":16},{"x":587,"y":16}];
+var initialDlid = [{"x":20,"y":40},{"x":133,"y":34},{"x":247,"y":34},{"x":360,"y":18},{"x":473,"y":34},{"x":587,"y":34}];
+
+var initialPos = [{"x":349,"y":220},{"x":556,"y":83},{"x":620,"y":327},{"x":368,"y":318},{"x":170,"y":363},{"x":152,"y":101}];
+var initialSize = [{"x":20,"y":16},{"x":133,"y":50},{"x":247,"y":50},{"x":360,"y":84},{"x":473,"y":67},{"x":587,"y":61}];
+var initialRotate = [{"x":20,"y":36},{"x":133,"y":38.88},{"x":247,"y":31.68},{"x":360,"y":41.76},{"x":473,"y":36},{"x":587,"y":36}];
+var initialWingSize = [{"x":20,"y":43.2},{"x":133,"y":43.2},{"x":247,"y":43.2},{"x":360,"y":43.2},{"x":473,"y":43.2},{"x":587,"y":43.2}];
+var initialWingWidth = [{"x":20,"y":48.96},{"x":133,"y":43.2},{"x":247,"y":43.2},{"x":360,"y":43.2},{"x":473,"y":43.2},{"x":587,"y":43.2}];
+var initialFlap = [{"x":20,"y":36},{"x":133,"y":36},{"x":247,"y":36},{"x":360,"y":36},{"x":473,"y":21.6},{"x":587,"y":40.32}];
+var initialIrisSize = [{"x":20,"y":20.16},{"x":133,"y":31.68},{"x":247,"y":31.68},{"x":360,"y":31.68},{"x":473,"y":31.68},{"x":587,"y":31.68}];
+var initialUlid = [{"x":20,"y":14.4},{"x":133,"y":23.04},{"x":247,"y":23.04},{"x":360,"y":38.88},{"x":473,"y":23.04},{"x":587,"y":23.04}];
+var initialDlid = [{"x":20,"y":57.6},{"x":133,"y":48.96},{"x":247,"y":48.96},{"x":360,"y":25.92},{"x":473,"y":48.96},{"x":587,"y":48.96}];
+
+_.final.addDotsEx(1, 1);
+_.final.addDotsEx(1, 1);
+var initialPos = [{"x":234,"y":172.60000000000002},{"x":360,"y":202.3},{"x":494.79999999999995,"y":140.2},{"x":578,"y":109},{"x":583,"y":366.1},{"x":510.5,"y":372.2},{"x":424.79999999999995,"y":324.9},{"x":267,"y":324},{"x":161.5999999999999,"y":363.6},{"x":128.0999999999999,"y":346.29999999999995},{"x":110,"y":277.4},{"x":128,"y":108}];
+var initialSize = [{"x":20,"y":28.599999999999994},{"x":77,"y":15.5},{"x":133,"y":32.7},{"x":190,"y":55},{"x":247,"y":53.099999999999994},{"x":303,"y":52.6},{"x":360,"y":59.5},{"x":417,"y":85},{"x":473,"y":67.5},{"x":530,"y":65.1},{"x":587,"y":69},{"x":643,"y":65}];
+var initialRotate = [{"x":20,"y":42.19999999999999},{"x":77,"y":41.8},{"x":133,"y":37.19999999999999},{"x":190,"y":22.879999999999995},{"x":247,"y":43.900000000000006},{"x":303,"y":39.6},{"x":360,"y":33.5},{"x":417,"y":41.76},{"x":473,"y":34.8},{"x":530,"y":33.6},{"x":587,"y":35.2},{"x":643,"y":40}];
+var initialWingSize = [{"x":20,"y":43.2},{"x":77,"y":43.2},{"x":133,"y":43.2},{"x":190,"y":43.2},{"x":247,"y":43.2},{"x":303,"y":43.2},{"x":360,"y":43.2},{"x":417,"y":43.2},{"x":473,"y":43.2},{"x":530,"y":43.2},{"x":587,"y":43.2},{"x":643,"y":43.2}];
+var initialWingWidth = [{"x":20,"y":49.6},{"x":77,"y":50},{"x":133,"y":48.2},{"x":190,"y":43.2},{"x":247,"y":43.5},{"x":303,"y":43.6},{"x":360,"y":43.4},{"x":417,"y":43.2},{"x":473,"y":43.1},{"x":530,"y":43.1},{"x":587,"y":42.8},{"x":643,"y":43.2}];
+var initialFlap = [{"x":20,"y":34.6},{"x":77,"y":32.4},{"x":133,"y":35.1},{"x":190,"y":47},{"x":247,"y":36.2},{"x":303,"y":39.5},{"x":360,"y":44},{"x":417,"y":36},{"x":473,"y":20.1},{"x":530,"y":19.5},{"x":587,"y":24.6},{"x":643,"y":40.32}];
+var initialIrisSize = [{"x":20,"y":18.8},{"x":77,"y":18},{"x":133,"y":21.6},{"x":190,"y":31.68},{"x":247,"y":31.3},{"x":303,"y":31.2},{"x":360,"y":31.4},{"x":417,"y":30.67999999999995},{"x":473,"y":31.8},{"x":530,"y":32},{"x":587,"y":32.4},{"x":643,"y":31.68}];
+var initialUlid = [{"x":20,"y":13.4},{"x":77,"y":12.7},{"x":133,"y":14.600000000000023},{"x":190,"y":22.039999999999964},{"x":247,"y":40.5},{"x":303,"y":36.4},{"x":360,"y":27.2},{"x":417,"y":20.879999999999995},{"x":473,"y":44.200000000000045},{"x":530,"y":33.9},{"x":587,"y":21.7},{"x":643,"y":23.04}];
+var initialDlid = [{"x":20,"y":58.5},{"x":77,"y":58.7},{"x":133,"y":56.3},{"x":190,"y":48.960000000000036},{"x":247,"y":35.200000000000045},{"x":303,"y":40.9},{"x":360,"y":47.799999999999955},{"x":417,"y":42.91999999999996},{"x":473,"y":32.200000000000045},{"x":530,"y":42.2},{"x":587,"y":51.2},{"x":643,"y":48.96}];
+
+		_.final.load(initialPos, 1);
+		_.size.load(initialSize, 1);
+		_.rot.load(initialRotate, 1);
+		_.wngsiz.load(initialWingSize, 1);
+		_.wngwid.load(initialWingWidth, 1);
+		_.flap.load(initialFlap, 1);
+		_.irissiz.load(initialIrisSize, 1);
+		_.ulid.load(initialUlid, 1);
+		_.dlid.load(initialDlid, 1);
+
+		// calculate+display
+		_.timer = setInterval(function(){
+
+			if (!_.pauseSelected) {
+				document.T += 1 / (720-20-20);
+				document.T = document.T - Math.floor(document.T);
+			}
+
+			_.slider.plot();
+			_.final.plot(document.T);
+			_.size.plot(document.T);
+			_.rot.plot(document.T);
+			_.wngsiz.plot(document.T);
+			_.wngwid.plot(document.T);
+			_.flap.plot(document.T);
+			_.irissiz.plot(document.T);
+			_.ulid.plot(document.T);
+			_.dlid.plot(document.T);
+
+//			$('txt').set('text', _.size.getv(document.T));
+
+			var c = document.id('myCanvas');
+			_.ctx = c.getContext('2d');
+
+			var rgb = ttorgb(document.T)
+			_.ctx.fillStyle = 'rgb('+rgb.r+','+rgb.g+','+rgb.b+')';
+_.ctx.fillStyle = 'rgb(204,204,204)'; // gray80
+			_.ctx.fillRect(0,0, 720,405);
+
+			// determine sequence
+			var t0 = document.T;
+			var t1 = document.T + 1/3.0;
+			var t2 = document.T + 2/3.0;
+			t1 = t1 - Math.floor(t1);
+			t2 = t2 - Math.floor(t2);
+
+			var v0 = _.size.getv(t0);
+			var v1 = _.size.getv(t1);
+			var v2 = _.size.getv(t2);
+
+			if (v0 < v1 && v1 < v2) {
+				render(0, t0);
+				render(1, t1);
+				render(2, t2);
+			} else if (v0 < v1) {
+				render(0, t0);
+				render(2, t2);
+				render(1, t1);
+			} else if (v1 < v2 && v2 < v0) {
+				render(1, t1);
+				render(2, t2);
+				render(0, t0);
+			} else if (v1 < v2) {
+				render(1, t1);
+				render(0, t0);
+				render(2, t2);
+			} else if (v2 < v0 && v0 < v1) {
+				render(2, t2);
+				render(0, t0);
+				render(1, t1);
+			} else if (v2 < v0) {
+				render(2, t2);
+				render(1, t1);
+				render(0, t0);
+			}
+		}, 25);
+
+	});
+
+</script>
+
+</body>
+</html>

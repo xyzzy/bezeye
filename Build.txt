@@ -1,0 +1,159 @@
+# Create storyboard
+toolbox.html
+
+# Build the tools
+g++ -o scq6 scq6.cc -lgd -O3
+g++ -o diffgif diffgif.cc -lgd -O3
+g++ -o mergeraw mergeraw.cc -lgd -O3
+
+# Build wing texture data
+mkdir wingdata
+php wing.php wingdata/%02d.png
+
+# Create truecolour frames for animation (hardcoded 1280x720)
+mkdir frames-1280x720
+php render.php wingdata/%02d.png frames-1280x720/%03d.png
+
+# Extract 7 colour palette from first frame (NOTE: files has been bundled)
+# ./scq6 --palette=octree --thresh=1024 --seed=1396282354 --filter=5 --ifilter=1 --initial-temperature=1.000000 --final-temperature=0.001000 --temperature-per-level=3 --repeat-per-temperature=1 frames-1280x720/000.png - 7 /dev/null -v -v
+# You need to manually copy the last lines, strip the first column and paste result in `palette-7.pal`.
+
+# Colour compress frames
+# remove -old from DOPTS for heavy compression, like in final version
+./gen-bezeye.sh
+
+# collect parts for animated gifs
+./mergeraw bezeye-1280x720-7.gif bezeye-1280x720-7/img-000.gif bezeye-1280x720-7/diff-???.gif --delay=5 -f
+
+#####
+
+Generating assets
+
+# collect parts for true-colour image
+ffmpeg -loglevel warning -r 20 -i frames-1280x720/%03d.png frames-1280x720.gif
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-7.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-7.gif
+
+# different palette sizes
+NUMCOL=4 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=5 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=6 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=7 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=8 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=9 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=10 ./gen-bezeye.sh >out 2>err&
+NUMCOL=11 ./gen-bezeye.sh >out 2>err&
+NUMCOL=12 ./gen-bezeye.sh >out 2>err&
+NUMCOL=13 ./gen-bezeye.sh >out 2>err&
+NUMCOL=14 ./gen-bezeye.sh >out 2>err&
+NUMCOL=15 ./gen-bezeye.sh >out 2>err&
+NUMCOL=16 ./gen-bezeye.sh >out 2>err&
+NUMCOL=7 OUTDIR=bezeye-1280x720-7-original PALETTE=original-7.pal ./gen-bezeye.sh  >out 2>err&
+
+# merge frames
+./mergeraw bezeye-1280x720-4.gif  bezeye-1280x720-4/img-000.gif bezeye-1280x720-4/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-1280x720-5.gif  bezeye-1280x720-5/img-000.gif bezeye-1280x720-5/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-1280x720-6.gif  bezeye-1280x720-6/img-000.gif bezeye-1280x720-6/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-1280x720-7.gif  bezeye-1280x720-7/img-000.gif bezeye-1280x720-7/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-1280x720-8.gif  bezeye-1280x720-8/img-000.gif bezeye-1280x720-8/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-1280x720-9.gif  bezeye-1280x720-9/img-000.gif bezeye-1280x720-9/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-1280x720-10.gif bezeye-1280x720-10/img-000.gif bezeye-1280x720-10/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-11.gif bezeye-1280x720-11/img-000.gif bezeye-1280x720-11/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-12.gif bezeye-1280x720-12/img-000.gif bezeye-1280x720-12/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-13.gif bezeye-1280x720-13/img-000.gif bezeye-1280x720-13/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-14.gif bezeye-1280x720-14/img-000.gif bezeye-1280x720-14/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-15.gif bezeye-1280x720-15/img-000.gif bezeye-1280x720-15/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-16.gif bezeye-1280x720-16/img-000.gif bezeye-1280x720-16/diff-???.gif --delay=5 -f
+./mergeraw bezeye-1280x720-7-original.gif  bezeye-1280x720-7-original/img-000.gif bezeye-1280x720-7-original/diff-???.gif   --delay=5 -f
+
+# create SBS
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-4.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-4.gif  </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-5.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-5.gif  </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-6.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-6.gif  </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-7.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-7.gif  </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-8.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-8.gif  </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-9.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-9.gif  </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-10.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-10.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-11.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-11.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-12.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-12.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-13.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-13.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-14.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-14.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-15.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-15.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-16.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-16.gif </dev/null
+ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-7-original.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-7-original.gif  </dev/null
+
+##
+
+# Animate wing texture
+ffmpeg -loglevel warning -r 15 -i wingdata/%02d.png wing.gif
+
+# scale original frames to 840x472 for github
+mkdir frames-840x472
+ffmpeg -loglevel warning -i frames-1280x720/%03d.png  -start_number 0 -vf scale=840x472 frames-840x472/%03d.png
+
+# different palette sizes
+NUMCOL=4  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-4  ./gen-bezeye.sh  >out 2>err&
+NUMCOL=5  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-5  ./gen-bezeye.sh  >out 2>err&
+NUMCOL=6  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-6  ./gen-bezeye.sh  >out 2>err&
+NUMCOL=7  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-7  ./gen-bezeye.sh  >out 2>err&
+NUMCOL=8  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-8  ./gen-bezeye.sh  >out 2>err&
+NUMCOL=9  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-9  ./gen-bezeye.sh  >out 2>err&
+NUMCOL=10 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-10 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=11 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-11 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=12 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-12 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=13 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-13 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=14 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-14 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=15 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-15 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=16 SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-16 ./gen-bezeye.sh  >out 2>err&
+NUMCOL=7  SRCDIR=frames-840x472 OUTDIR=bezeye-840x472-7-original PALETTE=original-7.pal ./gen-bezeye.sh  >out 2>err&
+
+# merge frames
+./mergeraw bezeye-840x472-4.gif  bezeye-840x472-4/img-000.gif bezeye-840x472-4/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-840x472-5.gif  bezeye-840x472-5/img-000.gif bezeye-840x472-5/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-840x472-6.gif  bezeye-840x472-6/img-000.gif bezeye-840x472-6/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-840x472-7.gif  bezeye-840x472-7/img-000.gif bezeye-840x472-7/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-840x472-8.gif  bezeye-840x472-8/img-000.gif bezeye-840x472-8/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-840x472-9.gif  bezeye-840x472-9/img-000.gif bezeye-840x472-9/diff-???.gif   --delay=5 -f
+./mergeraw bezeye-840x472-10.gif bezeye-840x472-10/img-000.gif bezeye-840x472-10/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-11.gif bezeye-840x472-11/img-000.gif bezeye-840x472-11/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-12.gif bezeye-840x472-12/img-000.gif bezeye-840x472-12/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-13.gif bezeye-840x472-13/img-000.gif bezeye-840x472-13/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-14.gif bezeye-840x472-14/img-000.gif bezeye-840x472-14/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-15.gif bezeye-840x472-15/img-000.gif bezeye-840x472-15/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-16.gif bezeye-840x472-16/img-000.gif bezeye-840x472-16/diff-???.gif --delay=5 -f
+./mergeraw bezeye-840x472-7-original.gif  bezeye-840x472-7-original/img-000.gif bezeye-840x472-7-original/diff-???.gif   --delay=5 -f
+
+# create SBS
+ffmpeg -loglevel warning -r 20 -i frames-840x472/%03d.png frames-840x472.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-4.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-4.gif  </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-5.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-5.gif  </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-6.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-6.gif  </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-7.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-7.gif  </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-8.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-8.gif  </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-9.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-9.gif  </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-10.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-10.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-11.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-11.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-12.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-12.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-13.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-13.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-14.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-14.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-15.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-15.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-16.gif -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-16.gif </dev/null
+ffmpeg -loglevel warning -i frames-840x472.gif -i bezeye-840x472-7-original.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-840x472-7-original.gif  </dev/null
+
+##
+
+# from each 840x472, extract frame
+mkdir tmp
+ffmpeg -loglevel warning -i sbs-840x472-4.gif -vf select='between(n\,30\,30)' cmp-840x472-4.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-5.gif -vf select='between(n\,30\,30)' cmp-840x472-5.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-6.gif -vf select='between(n\,30\,30)' cmp-840x472-6.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-7.gif -vf select='between(n\,30\,30)' cmp-840x472-7.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-8.gif -vf select='between(n\,30\,30)' cmp-840x472-8.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-9.gif -vf select='between(n\,30\,30)' cmp-840x472-9.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-10.gif -vf select='between(n\,30\,30)' cmp-840x472-10.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-11.gif -vf select='between(n\,30\,30)' cmp-840x472-11.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-12.gif -vf select='between(n\,30\,30)' cmp-840x472-12.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-13.gif -vf select='between(n\,30\,30)' cmp-840x472-13.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-14.gif -vf select='between(n\,30\,30)' cmp-840x472-14.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-15.gif -vf select='between(n\,30\,30)' cmp-840x472-15.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-16.gif -vf select='between(n\,30\,30)' cmp-840x472-16.png  </dev/null -y
+ffmpeg -loglevel warning -i sbs-840x472-7-original.gif -vf select='between(n\,30\,30)' cmp-840x472-7-original.png  </dev/null -y

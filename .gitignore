@@ -1,0 +1,25 @@
+.backup/
+.deps/
+.idea/
+
+# files created by autotools
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.h
+config.h.in
+config.log
+config.status
+configure
+m4/
+stamp-h1
+
+# generated files
+scq6
+mergeraw
+diffgif
+
+*.bak
+*.gz
+*.o
