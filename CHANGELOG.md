@@ -6,8 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## 1.0.0 xxxx
-
 ```
+2021-01-20 17:55:34 Added: Recovered lost octree code.
 2021-01-12 11:56:13 Historic commit.
 ```

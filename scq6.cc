@@ -39,6 +39,7 @@ int opt_filter = 1;
 int opt_ifilter = 1;
 int opt_palette_size;
 int bg_palette_size = 0;
+int opt_genpalette = 0;
 
 #define BSCALE (1.0/64.0 /65.0)
 double Bayer[8][8] = {
@@ -1113,7 +1114,7 @@ FILE *fil;
 	for (;;) {
 		int option_index = 0;
 		enum {	LO_HELP=1, LO_INITIAL, LO_FINAL, LO_TPL, LO_RPT, LO_PALETTE,
-			LO_VERBOSE='v', LO_W='w', LO_H='h', LO_SEED='s', LO_FILTER='f', LO_IFILTER='i', LO_THRESH='t', LO_OPAQUE='o' };
+			LO_VERBOSE='v', LO_W='w', LO_H='h', LO_SEED='s', LO_FILTER='f', LO_IFILTER='i', LO_THRESH='t', LO_OPAQUE='o', LO_GENPALETTE='g' };
 		static struct option long_options[] = {
 			/* name, has_arg, flag, val */
 			{"opaque", 1, 0, LO_OPAQUE},
@@ -1130,6 +1131,7 @@ FILE *fil;
 			{"temperature-per-level", 1, 0, LO_TPL},
 			{"repeat-per-temperature", 1, 0, LO_RPT},
 			{"palette", 1, 0, LO_PALETTE},
+			{"genpalette", 0, 0, LO_GENPALETTE},
 			{NULL, 0, 0, 0}
 		};
 
@@ -1169,6 +1171,9 @@ FILE *fil;
 			break;
 		case LO_PALETTE:
 			opt_palette = optarg;
+			break;
+		case LO_GENPALETTE:
+			opt_genpalette++;
 			break;
 
 		case LO_VERBOSE:
@@ -1299,6 +1304,37 @@ FILE *fil;
 
 	array2d< Pixel > image(width, height);
 	array2d< int > quantized_image(width, height);
+
+//--------
+	if (opt_palette_size > 2 && opt_palette && strcmp(opt_palette, "octree") == 0) {
+		node_heap heap = { 0, 0, 0 };
+		oct_node root = node_new(0, 0, 0);
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				int v = gdImageGetTrueColorPixel(im, x, y);
+				int r = ((v>>16) & 0xFF);
+				int g = ((v>>8) & 0xFF);
+				int b = (v & 0xFF);
+				heap_add(&heap, node_insert(root, r,g,b));
+			}
+		}
+
+		while (heap.n > opt_palette_size + 1)
+			heap_add(&heap, node_fold(pop_heap(&heap)));
+
+		for (int i = 1; i < heap.n; i++) {
+			oct_node got = heap.buf[i];
+			double c = got->count;
+			got->r = got->r / c + .5;
+			got->g = got->g / c + .5;
+			got->b = got->b / c + .5;
+//			printf("%2d | %3u %3u %3u (%d pixels)\n", i, got->r, got->g, got->b, got->count);
+			palette[i-1].r = got->r / 255.0;
+			palette[i-1].g = got->g / 255.0;
+			palette[i-1].b = got->b / 255.0;
+		}
+	}
+//--------
 
 	/* load source */
 	for (int y = 0; y < height; y++) {
@@ -1485,26 +1521,6 @@ if(0)
 		}
 	}
 
-if (0) {
-	FILE *fil = fopen("blur.png", "wb");
-	if (fil) {
-		gdImagePtr im = gdImageCreateTrueColor(width, height);
-		for(int y=0; y<height; y++) {
-			for (int x=0; x<width; x++) {
-				Pixel i = a0(x,y);
-				int r = (unsigned char)(255*i.r);
-				int g = (unsigned char)(255*i.g);
-				int b = (unsigned char)(255*i.b);
-				int c = gdImageColorAllocate(im, r, g, b);
-				gdImageSetPixel(im, x, y, c);
-			}
-		}
-		gdImagePng(im, fil);
-		gdImageDestroy(im);
-		fclose(fil);
-	}
-}
-
 	for(int j=0; j<height; j++) {
 		for(int i=0; i<width; i++) {
 			for(int k=0; k<p_coarse_variables->get_depth(); k++) {
@@ -1515,45 +1531,6 @@ if (0) {
 		}
 	}
 	p_coarse_variables->clear_border();
-
-	////////////////
-
-		fil = fopen("temp2.gif", "wb");
-		if (fil == NULL) {
-			fprintf(stderr, "Could not open output file\n");
-			return -1;
-		}
-
-		im = gdImageCreate(width, height);
-		int bl = gdImageColorAllocate(im, 0,0,0);
-		int wh = gdImageColorAllocate(im, 255,255,255);
-
-		for(int y=0; y<height; y++) {
-			for (int x=0; x<width; x++) {
-
-				int r1 = (unsigned char)(255*BGa0(x,y).r);
-				int g1 = (unsigned char)(255*BGa0(x,y).g);
-				int b1 = (unsigned char)(255*BGa0(x,y).b);
-				int r2 = (unsigned char)(255*a0(x,y).r);
-				int g2 = (unsigned char)(255*a0(x,y).g);
-				int b2 = (unsigned char)(255*a0(x,y).b);
-
-				int d = (r1-r2)*(r1-r2)+(g1-g2)*(g1-g2)+(b1-b2)*(b1-b2);
-				if (d < opt_thresh) {
-					gdImageSetPixel(im, x, y, bl);
-					fixpix(x,y) = 1;
-				} else {
-					gdImageSetPixel(im, x, y, wh);
-					fixpix(x,y) = 0;
-				}
-			}
-		}
-
-		gdImageGif(im, fil);
-		gdImageDestroy(im);
-		fclose(fil);
-
-	////////////////
 
     bool fixedPalette =  opt_palette!=NULL && strcmp(opt_palette, "octree") != 0;
 	spatial_color_quant(p_coarse_variables, a0, quantized_image, palette, opt_initial_temperature, opt_final_temperature,opt_tpl,opt_rpt, fixedPalette, opt_seed, BGimage, withBG, fixpix);
@@ -1663,6 +1640,11 @@ if (0) {
 	}
 	for(int row=0; row<opt_palette_size; row++) {
 		fprintf(stderr,"%d(%6d): %f %f %f\n", row, xxcnt[row], palette[row].r, palette[row].g, palette[row].b);
+	}
+	if (opt_genpalette) {
+		for(int row=0; row<opt_palette_size; row++) {
+			printf("%f %f %f\n", palette[row].r, palette[row].g, palette[row].b);
+		}
 	}
 
 	return 0;
