@@ -8,15 +8,15 @@
 [ -z "$SRCDIR" ] && SRCDIR=frames-1280x720
 # Output directory
 [ -z "$OUTDIR" ] && OUTDIR=bezeye-1280x720-$NUMCOL
+# Grid size / blur
+[ -z "$FILTER" ] && $FILTER=3
 
-SCQOPTS="--palette=$PALETTE --thresh=1024 --seed=1396282354 --filter=5 --ifilter=1 --initial-temperature=1.000000 --final-temperature=0.001000 --temperature-per-level=3 --repeat-per-temperature=1"
+SCQOPTS="--palette=$PALETTE --thresh=1024 --seed=1396282354 --filter=$FILTER --ifilter=1 --initial-temperature=1.000000 --final-temperature=0.001000 --temperature-per-level=3 --repeat-per-temperature=1"
 DIFOPTS="--thresh=9 --old -f"
-
-return
 
 mkdir -p $OUTDIR
 
-./scq6 ${SCQOPTS} $SRCDIR/000.png -                   $NUMCOL $OUTDIR/scq-000.fg.gif --opaque=$OUTDIR/img-000.gif 
+./scq6 ${SCQOPTS} $SRCDIR/000.png -                   $NUMCOL $OUTDIR/scq-000.fg.gif --opaque=$OUTDIR/img-000.gif
 ./scq6 ${SCQOPTS} $SRCDIR/001.png $OUTDIR/img-000.gif $NUMCOL $OUTDIR/scq-001.fg.gif --opaque=$OUTDIR/scq-001.bg.gif; ./diffgif ${DIFOPTS} $OUTDIR/diff-001.gif $OUTDIR/scq-001.fg.gif $OUTDIR/img-000.gif --opaque=$OUTDIR/img-001.gif
 ./scq6 ${SCQOPTS} $SRCDIR/002.png $OUTDIR/img-001.gif $NUMCOL $OUTDIR/scq-002.fg.gif --opaque=$OUTDIR/scq-002.bg.gif; ./diffgif ${DIFOPTS} $OUTDIR/diff-002.gif $OUTDIR/scq-002.fg.gif $OUTDIR/img-001.gif --opaque=$OUTDIR/img-002.gif
 ./scq6 ${SCQOPTS} $SRCDIR/003.png $OUTDIR/img-002.gif $NUMCOL $OUTDIR/scq-003.fg.gif --opaque=$OUTDIR/scq-003.bg.gif; ./diffgif ${DIFOPTS} $OUTDIR/diff-003.gif $OUTDIR/scq-003.fg.gif $OUTDIR/img-002.gif --opaque=$OUTDIR/img-003.gif

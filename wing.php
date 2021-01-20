@@ -18,8 +18,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (empty($argv[1]))
-    die ('usage: '.$argv[0]. ' <fileTemplate>'."\n");
+if (empty($argv[1]) || empty($argv[2]))
+    die ('usage: '.$argv[0]. ' <wingOutline> <fileTemplate>'."\n");
 
 $v0 = 0.65; // 0.55
 $a0 = 0.01;
@@ -75,9 +75,9 @@ $_a = array();
 $_v = array();
 $_c = array();
 
-$im0 = imagecreatefrompng('wing-outline.png');
+$im0 = imagecreatefrompng($argv[1]);
 if (!$im0)
-    die ("template not found\n");
+    die ("wing outline not found\n");
 
 $im = imagecreatetruecolor(792,1000);
 imagesavealpha($im, true);
@@ -344,6 +344,6 @@ if(1)
 		}
 	}
 
-imagepng($im, sprintf($argv[1], $loop));
+imagepng($im, sprintf($argv[2], $loop));
 
 }
