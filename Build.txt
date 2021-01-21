@@ -15,7 +15,7 @@ mkdir frames-1280x720
 php render.php wingdata/%02d.png frames-1280x720/%03d.png
 
 # Extract 7 colour palette from first frame (NOTE: files has been bundled)
-# ./scq6 --palette=octree --thresh=1024 --seed=1396282354 --filter=5 --ifilter=1 --initial-temperature=1.000000 --final-temperature=0.001000 --temperature-per-level=3 --repeat-per-temperature=1 frames-1280x720/000.png - 7 /dev/null -v -v
+# ./scq6 --palette=octree --thresh=1024 --seed=1396282354 --filter=5 frames-1280x720/000.png - 7 /dev/null -v -v
 # You need to manually copy the last lines, strip the first column and paste result in `palette-7.pal`.
 
 # Colour compress frames

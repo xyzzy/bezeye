@@ -1095,7 +1095,7 @@ int main(int argc, char* argv[]) {
 
 double opt_initial_temperature = 1.000;
 double opt_final_temperature = 0.001;
-int opt_tpl = 2;
+int opt_tpl = 3;
 int opt_rpt = 1;
 int opt_verbose = 0;
 int opt_width = 0;

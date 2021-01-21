@@ -1,6 +1,8 @@
-![bezeye-840x472-7.gif](https://xyzzy.github.io/bezeye/bezeye-840x472-7.gif)
+![bezeye-840x472-7-5x5.gif](https://xyzzy.github.io/bezeye-media/bezeye-840x472-7-5x5.gif)
 
 # Welcome to the Wonderful World of Bezeye
+
+Capturing the essence of colour perception looking at the real thing.
 
 Bezeye is an animated GIF showcasing Bézier Curve Texture+Movement and Spatial Color Quantization.  
 It is also a contribution entry for the Evoke 2014 demoscene party [https://www.evoke.eu/2014](https://www.evoke.eu/2014).  
@@ -42,11 +44,11 @@ The animation is 60 frames long and 120 frames are created.
 
 Below is an image of the base curve, click on the image to jump to the animation.
 
-[![Wings](assets/wing-237x300.png)](https://xyzzy.github.io/bezeye/data/wing.webp)
+[![Wings](assets/wing-237x300.png)](https://xyzzy.github.io/bezeye-media/wing.gif)
 
 ## Colour reduction
 
-Colour reduction improves the compression used in `GIF` images.  
+Colour reduction improves the compression used in GIF images.  
 Spatial Color Quantization (`scq`) is used to reduce the palette to 7 colours.  
 `scq` dithers an image using a smaller replacement palette.  
 The colour average of the dithered image matches the average of the original.  
@@ -77,7 +79,7 @@ Sadly I cannot reconstruct its creation.
 
 Click on the image below to open the animation:
 
-[![Original](assets/bezeye-534x300-7-original.png)](https://xyzzy.github.io/bezeye/data/bezeye-840x472-7-original.gif)
+[![Original](assets/bezeye-534x300-7-original.png)](https://xyzzy.github.io/bezeye-media/bezeye-1280x720-7-original.gif)
 
 # Requirements
 
@@ -94,6 +96,26 @@ Click on the image below to open the animation:
 ./configure  
 make
 
+## Automatic building
+
+Make has a number of prime targets:
+
+`bezeye-840x472-<numCol>-3x3.gif`  
+`bezeye-840x472-<numCol>-5x5.gif`  
+`bezeye-1280x720-<numCol>-3x3.gif`  
+`bezeye-1280x720-<numCol>-5x5.gif`  
+`bezeye-1280x720-7-original.gif`  
+`all-gif`  (all gifs)  
+`all-sbs`  (all side-by-sides)  
+`media`  (all media files for this project)  
+
+`3x3`/`5x5` are to indicate the grid size for determining the colour average.
+
+## Manual building
+
+Below are conceptual instructions for generating the animation.  
+The file [Build.txt](Build.txt) contains detailed instructions for different sizes and palettes.
+
 - Load the storyboard into a browser and tweak accordingly.  
 Copy the `JSON` data to `render.php`.
 
@@ -102,14 +124,12 @@ Copy the `JSON` data to `render.php`.
 `php wing.php wingdata/%02d.png`  
 This will generate 3 cycles of 60 frames that should animate as seamless.
 
-- Create truecolour frames for animation (hardcoded 1280x720)  
+- Create 120 true-colour frames for animation (hardcoded 1280x720)  
 `mkdir frames-1280x720`  
 `php render.php wingdata/%02d.png frames-1280x720/%03d.png`  
-This will create 120 frames.
 
-- Extract 7 colour palette from first frame (NOTE: file has been bundled)  
-`make palette-7.pal`  
-You need to manually copy the last lines, strip the first column and paste result in `palette-7.pal`.
+- Extract 7 colour palette from first frame  
+`./scq6 --palette=octree --filter=5 --genpalette frames-1280x720/000.png - <numColour> /dev/null >palette-<numCol>.pal`
 
 - Colour compress frames  
 ./gen-bezeye.sh
@@ -119,54 +139,35 @@ You need to manually copy the last lines, strip the first column and paste resul
 
 # Files
 
-- `anim/`
+[Build.txt](Build.txt)  
+Manual build instructions
 
-    [anim/evoke2014-1280x720-7.gif](anim/evoke2014-1280x720-7.gif)  
-    Contribution entry
+[diffgif.cc](diffgif.cc)  
+GIF transparency encoder for frames
 
-    [anim/evoke2014-1280x720-7-colors.gif](anim/evoke2014-1280x720-7-colors.gif)  
-    Palette containing the 7 colours
+[gen-bezeye.sh](gen-bezeye.sh)  
+Script for colour compressing frames
 
-    [anim/tookbox-gui.png](assets/tookbox-gui.png)  
-    Screenshot of GUI
+[mergeraw.cc](mergeraw.cc)  
+Create animated GIF from individual frames
 
-    [anim/wing-400x505-180.gif](anim/wing-400x505-180.gif)  
-    Wing colour texture, three 60 frame cycles starting with black background
+[mootools-*.js](mootools-core-1.4.5.js)  
+Mootools framework for [storyboard.html](storyboard.html)
 
-    [anim/wing-400x505-60.gif](anim/wing-400x505-60.gif)  
-    Wing colour texture, last 60 frame cycle with seamless loop
+[original-7.pal](original-7.pal)
+Original entry 7-colour palette.
 
-- `tools/`
+[render.php](render.php)  
+Render true-colour frames
 
-    [tools/gen-bezeye.sh](tools/gen-bezeye.sh)  
-    Script for colour compressing frames
+[scq6.cc](scq6.cc)  
+Spatial Color Quantization, convert true-colour to palette
 
-    [tools/Build.txt](Build.txt)  
-    Manual build instructions
+[storyboard.html](storyboard.html)  
+Storyboard GUI. Paste the settings in `render.php`
 
-    [tools/diffgif.cc](diffgif.cc)  
-    GIF transparency encoder for frames
-
-    [tools/evoke7.pal](tools/evoke7.pal)  
-    Fixed 7-colour palette. Created by catching debug output fro `scq`
-
-    [tools/mergeraw.cc](mergeraw.cc)  
-    Create animated GIF from individual frames
-
-    [tools/mootools-*.js](mootools-core-1.4.5.js)  
-    Mootools framework for [tools/storyboard.html](storyboard.html)
-
-    [tools/render.php](tools/render.php)  
-    Render true-colour frames
-
-    [tools/scq6.cc](scq6.cc)  
-    Spatial Color Quantization, convert true-colour to palette
-
-    [tools/storyboard.html](storyboard.html)  
-    Storyboard GUI. Paste the settings in `render.php`
-
-    [tools/vleugel1.php](tools/vleugel1.php)  
-    Render true-colour bézier based texture for wings
+[wing.php](wing.php)  
+Render true-colour bézier based texture for wings
 
 # Installation
 
