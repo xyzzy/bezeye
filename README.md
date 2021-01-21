@@ -1,6 +1,6 @@
 \[click on image to show animation\]  
 <a href="https://xyzzy.github.io/bezeye-media/bezeye-840x472-9-5x5.gif" target="_blank"><img src="assets/bezeye-840x472-9-5x5.png" width="100%" alt="favimage"/></a>  
-\[true-colour converted to 9 colour palette\]
+\[24bit-colour converted to 9 colour palette\]
 
 # Welcome to the Wonderful World of Bezeye
 
@@ -59,7 +59,7 @@ The colour average of the dithered image matches the average of the original.
 A `3x3` or `5x5` grid is used t calculate the average of the center pixel.       
 
 Below is link to a comparison page displaying different palette sizes ranging from 4 to 16 colours.  
-The animations are split-screen, the lower left being the original true-colour and upper right being the colour reduced.
+The animations are split-screen, the lower left being the original 24bit-colour and upper right being the colour reduced.
 
 \[click on image to show demonstration\]  
 [![Colour Reduction](assets/sbs-534x300-7.png)](Compare.md)
@@ -131,7 +131,7 @@ Copy the `JSON` data to `render.php`.
 `php wing.php wingdata/%02d.png`  
 This will generate 3 cycles of 60 frames that should animate as seamless.
 
-- Create 120 true-colour frames for animation (hardcoded 1280x720)  
+- Create 120 24bit-colour frames for animation (hardcoded 1280x720)  
 `mkdir frames-1280x720`  
 `php render.php wingdata/%02d.png frames-1280x720/%03d.png`  
 
@@ -165,16 +165,16 @@ Mootools framework for [storyboard.html](storyboard.html)
 Original entry 7-colour palette.
 
 [render.php](render.php)  
-Render true-colour frames
+Render 24bit-colour frames
 
 [scq6.cc](scq6.cc)  
-Spatial Color Quantization, convert true-colour to palette
+Spatial Color Quantization, convert 24bit-colour to palette
 
 [storyboard.html](storyboard.html)  
 Storyboard GUI. Paste the settings in `render.php`
 
 [wing.php](wing.php)  
-Render true-colour bézier based texture for wings
+Render 24bit-colour bézier based texture for wings
 
 # Installation
 

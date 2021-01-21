@@ -1,9 +1,9 @@
-# Comparing side-by-side true-colour against SCQ colour reduction
+# Comparing side-by-side 24bit-colour against SCQ colour reduction
 
-Below is a list of side-by-side comparisons between the 840x472 true-colour and different SCQ settings.  
+Below is a list of side-by-side comparisons between the 840x472 24bit-colour and different SCQ settings.  
 Upto 16 colours use a 5x5 grid to calculate averages, 32 and 64 colours uses a 3x3 grid.
 
-Down-left of diagonal is the true-colour and upper-right the palette version.
+Down-left of diagonal is the 24bit-colour and upper-right the palette version.
 
 Clicking on the image opens the accompanying animated GIF.
 
