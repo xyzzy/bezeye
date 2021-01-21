@@ -1,4 +1,6 @@
-![bezeye-840x472-7-5x5.gif](https://xyzzy.github.io/bezeye-media/bezeye-840x472-7-5x5.gif)
+\[click on image to show animation\]  
+<a href="https://xyzzy.github.io/bezeye-media/bezeye-840x472-9-5x5.gif" target="_blank"><img src="assets/bezeye-840x472-9-5x5.png" width="100%" alt="favimage"/></a>  
+\[true-colour converted to 9 colour palette\]
 
 # Welcome to the Wonderful World of Bezeye
 
@@ -32,6 +34,7 @@ Click on the image to jump to the containing page.
 The red pads can be dragged to change the curve.  
 The green lines illustrate where the traditional off-curve control points are located.
 
+\[click on image to show demonstration\]  
 [![Closed Continuous Bézier Curves](assets/remastered-300x300.png)](https://rockingship.github.io/ccbc/remastered.html)
 
 ## Wings
@@ -44,6 +47,7 @@ The animation is 60 frames long and 120 frames are created.
 
 Below is an image of the base curve, click on the image to jump to the animation.
 
+\[click on image to show animation\]  
 [![Wings](assets/wing-237x300.png)](https://xyzzy.github.io/bezeye-media/wing.gif)
 
 ## Colour reduction
@@ -57,7 +61,8 @@ A `3x3` or `5x5` grid is used t calculate the average of the center pixel.
 Below is link to a comparison page displaying different palette sizes ranging from 4 to 16 colours.  
 The animations are split-screen, the lower left being the original true-colour and upper right being the colour reduced.
 
-[![Colour Reduction](assets/sbs-534x300-7.png)](https://xyzzy.github.io/bezeye/Compare.md)
+\[click on image to show demonstration\]  
+[![Colour Reduction](assets/sbs-534x300-7.png)](Compare.md)
 
 ## Storyboard
 
@@ -69,6 +74,7 @@ Attention has been put into not making the wings collide when they pass each oth
 Below is a link to the storyboard.  
 At the bottom of the page are the Bézier control points that are manually cut/pasted into the rendering code. 
 
+\[click on image to show demonstration\]  
 [![Storyboard](assets/storyboard-534x300.png)](https://xyzzy.github.io/bezeye/storyboard.html)
 
 # Original entry
@@ -79,6 +85,7 @@ Sadly I cannot reconstruct its creation.
 
 Click on the image below to open the animation:
 
+\[click on image to show animation\]  
 [![Original](assets/bezeye-534x300-7-original.png)](https://xyzzy.github.io/bezeye-media/bezeye-1280x720-7-original.gif)
 
 # Requirements
