@@ -29,7 +29,7 @@ php render.php wingdata/%02d.png frames-1280x720/%03d.png
 
 Generating assets
 
-# collect parts for true-colour image
+# collect parts for 24bit-colour image
 ffmpeg -loglevel warning -r 20 -i frames-1280x720/%03d.png frames-1280x720.gif
 ffmpeg -loglevel warning -i frames-1280x720.gif -i bezeye-1280x720-7.gif  -filter_complex "[1:v][0:v]blend=all_expr=if(gt(X\,Y*(W/H))\,A\,B)" sbs-1280x720-7.gif
 

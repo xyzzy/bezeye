@@ -34,7 +34,7 @@ wing.gif :
 	php $(srcdir)/wing.php $(srcdir)/wing-outline.png wingdata/%02d.png
 	ffmpeg -i wingdata/%02d.png $@ -y
 
-# Create true-colour frames for animation (hardcoded 1280x720)
+# Create 24bit-colour frames for animation (hardcoded 1280x720)
 frames-840x472.gif : frames-1280x720.gif
 	mkdir -p frames-840x472
 	ffmpeg -loglevel warning -i frames-1280x720/%03d.png -start_number 0 -vf scale=840x472 frames-840x472/%03d.png

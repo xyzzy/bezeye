@@ -4,7 +4,7 @@
 
 # Welcome to the Wonderful World of Bezeye
 
-Capturing the essence of colour perception looking at the real thing.
+*Capturing the essence of colour perception looking at the real thing...*
 
 Bezeye is an animated GIF showcasing Bézier Curve Texture+Movement and Spatial Color Quantization.  
 It is also a contribution entry for the Evoke 2014 demoscene party [https://www.evoke.eu/2014](https://www.evoke.eu/2014).  
