@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ```
+2021-02-17 19:26:24 Changed: Table of contents and Headings in `README.md`.
 2021-01-22 14:17:51 Changed: Italic sub-title.
 ```
 
