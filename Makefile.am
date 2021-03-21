@@ -2,20 +2,22 @@ SHELL = bash
 
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = \
-	LICENSE.txt CHANGELOG.md README.md \
-	.gitignore .nojekyll \
-	Build.txt \
-	Compare.md \
-	cmp-840x472-*.png \
+	.gitignore \
+	_config.yml _data/home.yml \
+	assets/favicon-32.png assets/favicon-152.png assets/favicon-192.png \
+	assets/bezeye-220x124.png \
+	assets/favimage-480x270.jpg assets/favimage-840x472.jpg \
+	CHANGELOG.md LICENSE.txt README.md index.md Build.txt Compare.md \
+        autogen.sh \
 	gen-bezeye.sh \
 	mootools-core-1.4.5.js \
 	mootools-more-1.4.0.1.js \
 	original-7.pal \
-	palette-*.pal \
 	render.php \
 	storyboard.html \
 	wing.php \
-	wing-outline.png
+	wing-outline.png \
+	assets/bezeye-534x300-7-original.png assets/remastered-300x300.png assets/sbs-534x300-7.png assets/storyboard-534x300.png assets/wing-237x300.png 
 
 bin_PROGRAMS = diffgif mergeraw scq6
 

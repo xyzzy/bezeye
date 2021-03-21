@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 2021-03-21 00:07:22 [Version 1.1.0]
+
 ```
 2021-03-19 17:43:15 Added: `moonwalk` theme.
 2021-02-17 19:26:24 Changed: Table of contents and Headings in `README.md`.
@@ -24,4 +26,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 2021-01-12 11:56:13 Historic commit.
 ```
 
-[Unreleased]: https://github.com/xyzzy/bezeye/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/xyzzy/bezeye/compare/v1.1.0...HEAD
+[Version 1.1.0]: https://github.com/xyzzy/bezeye/compare/v1.0.0...v1.1.0
