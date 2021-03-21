@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 2021-03-21 00:07:22 [Version 1.1.0]
 
 ```
+2021-03-21 14:56:06 Fixed: Added `assets/remastered-300x300.png`.
 2021-03-19 17:43:15 Added: `moonwalk` theme.
 2021-02-17 19:26:24 Changed: Table of contents and Headings in `README.md`.
 2021-01-22 14:17:51 Changed: Italic sub-title.

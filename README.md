@@ -219,7 +219,7 @@ This project focuses on a single use-case with no consideration towards portabil
 Grab one of the tarballs at [https://github.com/xyzzy/bezeye/releases](https://github.com/xyzzy/bezeye/releases) or checkout the latest code:
 
 ```sh
-        git clone https://github.com/xyzzy/bezeye.git
+  git clone https://github.com/xyzzy/bezeye.git
 ```
 
 ## Versioning
