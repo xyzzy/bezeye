@@ -1,12 +1,19 @@
-\[click on image to show animation\]  
-<a href="https://xyzzy.github.io/bezeye-media/bezeye-840x472-9-5x5.gif" target="_blank"><img src="assets/bezeye-840x472-9-5x5.png" width="100%" alt="favimage"/></a>  
+---
+layout: home
+title: "bezeye - Bézier curve texture+movement and Spatial Color Quantization"
+image: assets/favimage-472x472.jpg
+---
+
+![teaser](https://xyzzy.github.io/bezeye-media/bezeye-840x472-9-5x5.gif)
 \[24bit-colour converted to 9 colour palette\]
 
-# Bezeye
+# bezeye
 
-## Welcome to the Wonderful World of Bezeye
+Bézier curve texture+movement and Spatial Color Quantization
 
-*Capturing the essence of colour perception looking at the real thing...*
+### Welcome to the Wonderful World of Bézier animations
+
+*Capturing the essence of colour perception looking at the real thing*
 
 Bezeye is an animated GIF showcasing Bézier Curve Texture+Movement and Spatial Color Quantization.  
 It is also a contribution entry for the Evoke 2014 demoscene party [https://www.evoke.eu/2014](https://www.evoke.eu/2014).  
@@ -16,7 +23,7 @@ This project contains the modernised snapshot of the source for the code+tools, 
 
 ## Table of contents
 
-  - [Welcome to the Wonderful World of Bezeye](#welcome-to-the-wonderful-world-of-bezeye)
+  - [Welcome to the Wonderful World of Bezeye](#welcome-to-the-wonderful-world-of-bézier-animations)
   - [Table of contents](#table-of-contents)
   - [Showcasing](#showcasing)
     - [Bézier curves](#b%C3%A9zier-curves)
@@ -120,7 +127,7 @@ Click on the image below to open the animation:
 
 ## Building
 
-```
+```sh
         ./autogen.sh  
         ./configure  
         make
@@ -206,6 +213,14 @@ The file [Build.txt](Build.txt) contains detailed instructions for different siz
 The file [tools/Build.txt](Build.txt) contains manual instructions to re-create the competition entry.
 
 This project focuses on a single use-case with no consideration towards portability.
+
+## Source code
+
+Grab one of the tarballs at [https://github.com/xyzzy/bezeye/releases](https://github.com/xyzzy/bezeye/releases) or checkout the latest code:
+
+```sh
+        git clone https://github.com/xyzzy/bezeye.git
+```
 
 ## Versioning
 
