@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+```
+2021-03-21 16:13:11 Added: Reference to `bezeye-media` in navbar.
+```
+
 ## 2021-03-21 00:07:22 [Version 1.1.0]
 
 ```

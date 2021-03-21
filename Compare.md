@@ -1,3 +1,9 @@
+---
+layout: home
+title: "bezeye - Comparing side-by-side"
+image: assets/favimage-472x472.jpg
+---
+
 # Comparing side-by-side 24bit-colour against SCQ colour reduction
 
 Below is a list of side-by-side comparisons between the 840x472 24bit-colour and different SCQ settings.  

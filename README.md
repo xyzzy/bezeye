@@ -91,7 +91,7 @@ Below is link to a comparison page displaying different palette sizes ranging fr
 The animations are split-screen, the lower left being the original 24bit-colour and upper right being the colour reduced.
 
 \[click on image to show demonstration\]  
-[![Colour Reduction](assets/sbs-534x300-7.png)](Compare.md)
+[![Colour Reduction](assets/sbs-534x300-7.png)](Compare.html)
 
 ### Storyboard
 
